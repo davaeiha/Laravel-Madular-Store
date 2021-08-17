@@ -1,0 +1,14 @@
+{
+    "name": "Management",
+    "alias": " ماژول ها",
+    "description": "ماژولی برای مدیریت ماژول ها",
+    "keywords": [],
+    "priority": 0,
+    "canDisable": false,
+    "providers": [
+        "Modules\\Management\\Providers\\ManagementServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
