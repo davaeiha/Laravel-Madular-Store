@@ -1,5 +1,6 @@
 {
     "Discount": true,
     "Cart": true,
-    "Management": true
+    "Management": true,
+    "User": true
 }
