@@ -3,10 +3,10 @@
 namespace Modules\Cart\Helpers;
 
 use App\Models\Product;
-use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Modules\Discount\Entities\Discount;
-use Psy\Util\Str;
 
 class CartService
 {
@@ -15,16 +15,24 @@ class CartService
     protected $cartSession;
     protected $sessionId;
 
+    /**
+     * building our cart based on sessions
+     */
     public function __construct(){
         $this->cartCollection = session()->get('cart') ?? collect([]);
     }
 
-    public function getCartCollection(){
-        return $this->cartCollection;
-    }
-
-
-    public function updateQuantity($key,$option){
+    /**
+     * update quantity of card if key is a number
+     * and specific params if key is an array
+     *
+     *
+     * @param $key
+     * @param $option
+     * @return $this
+     */
+    public function updateQuantity($key,$option): CartService
+    {
         $item = $this->get($key,false);
 
         if(is_numeric($option)){
@@ -41,12 +49,18 @@ class CartService
         return $this;
     }
 
+    /**
+     * put a product in a Cart and Update it
+     *
+     * @param array $cartValues
+     * @param null $obj
+     */
 
     public function put(array $cartValues, $obj=null){
 
         if($obj instanceof Model){
             $value = array_merge([
-                "id"=> \Illuminate\Support\Str::random(10),
+                "id"=> Str::random(10),
                 "subject_id"=>$obj->id,
                 "subject_type"=>get_class($obj),
                 'discount_percentage'=>0,
@@ -61,7 +75,14 @@ class CartService
         session()->put('cart',$this->cartCollection);
     }
 
-    public function has($key){
+    /**
+     * check a product existence in a cart
+     *
+     * @param $key
+     * @return bool
+     */
+    public function has($key): bool
+    {
 
         if($key instanceof Model) {
             return !is_null(
@@ -74,6 +95,13 @@ class CartService
         );
     }
 
+
+    /**
+     * changing the cart in a better collection
+     *
+     * @param $item
+     * @return array|mixed
+     */
     protected function withRelationship($item){
         if(isset($item["subject_id"]) && isset($item["subject_type"])){
             $class = $item["subject_type"];
@@ -91,8 +119,13 @@ class CartService
         return $item;
     }
 
-
-    public function get($key,$withRelationShip=true){
+    /**
+     * getting a specific item in cart according to id or the product object
+     * @param $key
+     * @param bool $withRelationShip
+     * @return array|mixed
+     */
+    public function get($key, bool $withRelationShip=true){
         if($key instanceof Model){
             $item =  $this->cartCollection->where('subject_id',$key->id)->where('subject_type',get_class($key))->first();
             return $withRelationShip==true ? $this->withRelationship($item) : $item;
@@ -102,13 +135,27 @@ class CartService
         return $withRelationShip==true ? $this->withRelationship($item) : $item;
     }
 
-    public function all($withRelationShip = true){
+
+    /**
+     * getting all the items in cart
+     *
+     * @param bool $withRelationShip
+     * @return Collection
+     */
+    public function all(bool $withRelationShip = true): Collection
+    {
         return $this->cartCollection->map(function ($item) use ($withRelationShip) {
             return $withRelationShip==true ? $this->withRelationship($item) : $item;
         });
     }
 
-    public function count($obj){
+    /**
+     * counting the quantity of a product in cart
+     * @param $obj
+     * @return int
+     */
+    public function count($obj): int
+    {
         $item = $this->get($obj,false);
 
         if(isset($item["quantity"])){
@@ -118,6 +165,10 @@ class CartService
         }
     }
 
+    /**
+     * deleting a specific product from cart
+     * @param $key
+     */
     public function delete($key){
         if($this->has($key)){
             $this->cartCollection = $this->cartCollection->filter(function ($item) use ($key) {
@@ -133,6 +184,9 @@ class CartService
         }
     }
 
+    /**
+     * flush the cart
+     */
     public function flush()
     {
         $carts = $this->all();
@@ -141,6 +195,12 @@ class CartService
         });
     }
 
+    /**
+     * add discount to our cart structure
+     *
+     * @param Discount $discount
+     * @return $this
+     */
     public function addDiscount(Discount $discount): CartService
     {
             $percentage = $discount->percent;
@@ -157,6 +217,10 @@ class CartService
 
     }
 
+    /**
+     * check the discount in the cart
+     * @return bool
+     */
     public function isAllWithoutDiscount(): bool
     {
         if($this->all()->isNotEmpty()){
@@ -168,6 +232,11 @@ class CartService
         }
     }
 
+    /**
+     * access to the executed discount
+     *
+     * @return mixed
+     */
     public function getDiscount(){
 
         $products = $this->all()->pluck("product");
@@ -180,6 +249,11 @@ class CartService
 
     }
 
+    /**
+     * remove discount from the cart
+     *
+     * @return $this
+     */
     public function removeDiscount(): CartService
     {
         $products = $this->getDiscount()->products;

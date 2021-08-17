@@ -14,6 +14,10 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Cart\Http\Controllers\Frontend\CartController;
 
+/**
+ * routes of the module cart
+ */
+
 Route::prefix('cart')->group(function() {
     Route::get('/',[CartController::class,'showCart']);
     Route::delete('/remove/{id}',[CartController::class,"removeCart"])->name("cart.remove");

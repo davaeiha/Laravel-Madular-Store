@@ -14,11 +14,14 @@ use phpDocumentor\Reflection\Types\Boolean;
  * @method static array get($key,$withRelationship);
  * @method static array all($withRelationship);
  * @method static array updateQuantity($obj,$option);
+ * @method static array withRelationship($item);
  * @method static Cart flush();
  * @method static Cart addDiscount($discount);
  * @method static Boolean isAllWithoutDiscount();
  * @method static Discount getDiscount();
  * @method static Cart removeDiscount();
+ * @method static int count($obj);
+ * @method static void delete($key)
  */
 class Cart extends Facade
 {
