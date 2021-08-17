@@ -1,8 +1,6 @@
-<?php
+<?php namespace Modules\User\Entities;
 
-namespace App\Models;
 
-use http\Env\Request;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,12 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
 use Modules\Discount\Entities\Discount;
 
+/**
+ * @method static where(string $string, int $int)
+ * @method static latest()
+ */
 class User extends Authenticatable implements  MustVerifyEmail
 {
-    use HasFactory, Notifiable,Searchable;
+    use HasFactory, Notifiable;
+
+    /**
+     * @var string
+     */
+    protected $table='users';
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +59,10 @@ class User extends Authenticatable implements  MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * check if a user is supervisor
+     * @return bool
+     */
     public function is_supervisor(): bool
     {
         if ($this->is_supervisor === 1){
@@ -62,19 +72,22 @@ class User extends Authenticatable implements  MustVerifyEmail
         return false;
     }
 
+    /**
+     *check if a user is staff
+     *
+     * @return bool
+     */
     public function is_staff(): bool
     {
         if ($this->is_staff === 1){
             return true;
         }
-
         return false;
-
     }
 
     /**
      * Send the password reset notification.
-     *
+     * @function sendPasswordResetNotification
      * @param  string  $token
      * @return void
      */
@@ -83,11 +96,22 @@ class User extends Authenticatable implements  MustVerifyEmail
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    /**
+     * shows if a user has a specific type of authentication
+     * @function select2FacAuth
+     * @param $key
+     * @return bool
+     */
     public function select2FacAuth($key): bool
     {
         return $this->type == $key;
     }
 
+    /**
+     * access active codes of a user
+     * @function activeCodes
+     * @return HasMany
+     */
     public function activeCode(): HasMany
     {
         return $this->hasMany(ActiveCode::class);
@@ -97,7 +121,6 @@ class User extends Authenticatable implements  MustVerifyEmail
      * Description: شماره تلفن طرف چک میکنه
      *
      * @function hasEnabledType
-     *
      * @return bool
      */
     public function hasEnabledType(): bool
@@ -106,64 +129,114 @@ class User extends Authenticatable implements  MustVerifyEmail
         return !! $this->type !== "off";
     }
 
+    /**
+     *accessing user`s roles
+     *
+     * @function roles
+     * @return BelongsToMany
+     */
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
     }
 
+    /**
+     * accessing user`s permissions
+     *
+     * @function permissions
+     * @return BelongsToMany
+     */
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class);
     }
 
+    /**
+     * accessing  products have been registered ordered
+     *
+     * @function products
+     * @return HasMany
+     */
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }
 
+
+    /**
+     * access user`s comment
+     *
+     * @function comments
+     * @return HasMany
+     */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * check if user has specific permission
+     *
+     * @param Permission $permission
+     * @return bool
+     */
     public function hasPermission(Permission $permission): bool
     {
         return !! $this->permissions->contains("name",$permission->name);
     }
 
+    /**
+     * check user`s permission by his/her roles
+     *
+     * @param Permission $permission
+     * @return bool
+     */
     public function hasRoleByPermission(Permission $permission): bool
     {
 
         return is_null($this->roles->intersect($permission->roles));
     }
 
+    /**
+     * check user have a permission by his/her permissions and roles both
+     *
+     * @param Permission $permission
+     * @return bool
+     */
     public function userAllowed(Permission $permission): bool
     {
         return !! $this->hasPermission($permission) || $this->hasRoleByPermission($permission);
     }
 
+    /**
+     * access user`s order
+     *
+     * @return HasMany
+     */
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * access user`s downloads
+     *
+     * @return HasMany
+     */
     public function downloads(): HasMany
     {
         return $this->hasMany(Download::class);
     }
 
+    /**
+     * access user`s discounts
+     *
+     * @return BelongsToMany
+     */
+
     public function discounts(): BelongsToMany
     {
         return $this->belongsToMany(Discount::class);
     }
-
-
-//    public function userAllowed($permission){
-//        if($this->hasPermission($permission) || $this->hasRole($permission->roles)){
-//            return true;
-//        }
-//
-//        return false;
-//    }
 
 }

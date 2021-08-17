@@ -17,10 +17,7 @@ Route::get('/' , function() {
 });
 
 
-Route::resource("users", UserController::class);
 
-Route::get("/users/{user}/permissions",[\App\Http\Controllers\Admin\User\PermissionController::class,"create"])->name("users.permissions");
-Route::post("/users/{user}/permissions",[\App\Http\Controllers\Admin\User\PermissionController::class,"store"])->name("users.permissions.store");
 
 Route::resource("permission", PermissionController::class);
 Route::resource("roles", RoleController::class);

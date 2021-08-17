@@ -25,7 +25,7 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    @include("layouts.errors")
+    @include("resources.views.layouts.errors")
 
     <form class="form-horizontal" method="post" action="{{route("admin.users.permissions.store",["user"=>$user->id])}}">
         @csrf
@@ -39,15 +39,6 @@
                     @endforeach
                 </select>
             </div>
-
-{{--            <div class="form-group">--}}
-{{--                <label for="permissions"  class="col-sm-2 control-label">اجازه دسترسی ها</label>--}}
-{{--                <select name="permissions[]" id="permissions" class="form-control"  multiple>--}}
-{{--                    @foreach(\App\Models\Permission::all() as $permission )--}}
-{{--                        <option value="{{$permission->id}}" name="{{$permission->name}}" {{$user->permissions->contains($permission) ? "selected" : ""}}>{{$permission->label}}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
 
         </div>
         <!-- /.card-body -->

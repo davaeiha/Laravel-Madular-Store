@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\User;
+namespace Modules\User\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -17,23 +16,25 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
+use Modules\User\Entities\User;
 
 class UserController extends Controller
 {
+    /**
+     * specifying the permissions for each method
+     */
     public function __construct()
     {
- /*4*/  $this->middleware("can:edit-user")->only(["edit","update"]);
+        $this->middleware("can:edit-user")->only(["edit","update"]);
         $this->middleware("can:create-user")->only(["create","store"]);
         $this->middleware("can:delete-user")->only(["destroy"]);
         $this->middleware("can:show-user")->only(["index"]);
 
-//        $this->middleware("can:edit,user")->only(["edit"]);
-//        $this->middleware("can:delete,user")->only(["destroy"]);
     }
 
     /**
      * Display a listing of the resource.
-     *
+     * show all the users
      * @return Application|Factory|View
      */
     public function index()
@@ -59,7 +60,7 @@ class UserController extends Controller
             $users = User::where("is_supervisor", 0)->orWhere("is_staff", 0)->paginate(20);
         }
 
-        return view("admin.users.all",["users"=>$users]);
+        return view("user::admin.all",["users"=>$users]);
     }
 
     /**
@@ -69,7 +70,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("admin.users.create");
+        return view("user::admin.create");
     }
 
     /**
@@ -101,16 +102,6 @@ class UserController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -120,24 +111,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //differnt ways of using Gates::
-
-//        return $user->permissions();
-
-///*1*/        if(\Illuminate\Support\Facades\Gate::allows("edit-user",$user)){
-//            return view("admin.users.edit",compact("user"));
-//        }
-//        abort(403);
-
-// 2       if(\Illuminate\Support\Facades\Gate::denies("edit-user",$user)){
-//            abort(403,"Access denied");
-//        }
-//        return view("admin.users.edit");
-
-// /*3*/       $this->authorize("edit-user");
-//
-//        return view("admin.users.edit");
-        return view("admin.users.edit",compact("user"));
+        return view("user::admin.edit",compact("user"));
     }
 
     /**

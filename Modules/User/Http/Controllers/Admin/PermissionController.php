@@ -1,24 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Admin\User;
+namespace Modules\User\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
-use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
+use Modules\User\Entities\User;
 
 class PermissionController extends Controller
 {
+    /**
+     * specifying the permission
+     */
     public function __construct(){
         $this->middleware("can:staff-user-permission")->only(["create","store"]);
     }
 
+    /**
+     * go to page for making a permission for user
+     * @param User $user
+     * @return Application|Factory|View
+     */
     public function create(User $user){
-        return view("admin.users.permissions",["user"=>$user]);
+        return view("user::admin.permissions",["user"=>$user]);
     }
 
+    /**
+     * storing a specific permission for user
+     *
+     * @param Request $request
+     * @param User $user
+     * @return Application|RedirectResponse|Redirector
+     */
     public function store(Request $request,User $user){
         $validatedData = $request->validate([
             "permissions"=>['array'],
