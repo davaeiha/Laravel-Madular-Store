@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use http\Env\Request;
+
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,12 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
 use Modules\Discount\Entities\Discount;
 
 class User extends Authenticatable implements  MustVerifyEmail
 {
-    use HasFactory, Notifiable,Searchable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
