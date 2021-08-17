@@ -9,10 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Discount\Entities\Discount;
+use Modules\RolePermission\Entities\Permission;
+use Modules\RolePermission\Entities\Role;
 
 /**
  * @method static where(string $string, int $int)
  * @method static latest()
+ * @property mixed permissions
+ * @property mixed roles
  */
 class User extends Authenticatable implements  MustVerifyEmail
 {

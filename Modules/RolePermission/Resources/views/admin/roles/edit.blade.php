@@ -36,7 +36,7 @@
         <div class="form-group">
             <label for="permissions"  class="col-sm-2 control-label">اجازه دسترسی ها</label>
             <select name="permissions[]" id="permissions" class="form-control" multiple>
-                @foreach(\App\Models\Permission::all() as $permission )
+                @foreach(\Modules\RolePermission\Entities\Permission::all() as $permission )
                     <option value="{{$permission->id}}" name="{{$permission->name}}" {{$role->permissions->contains($permission) ? "selected" : "" }}> {{$permission->label}} </option>
                 @endforeach
             </select>

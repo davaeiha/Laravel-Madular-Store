@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Providers;
+namespace Modules\RolePermission\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Modules\User\Http\Controllers';
+    protected $moduleNamespace = 'Modules\RolePermission\Http\Controllers';
 
     /**
      * Called before routes are registered.
@@ -49,20 +49,23 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('User', '/Routes/web.php'));
+            ->group(module_path('RolePermission', '/Routes/web.php'));
     }
 
     /**
-     * @return void
-     * @discription specify admin routes for user
+     *
      */
 
-    protected function mapAdminRoutes()
-    {
-        Route::middleware(['web','auth','auth.admin'])
-            ->name('admin.')
-            ->prefix('/admin')
-            ->group(module_path('User', '/Routes/Admin.php'));
+    /**
+     * define the "admin " routes for the application
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes(){
+        Route::middleware(["web","auth","auth.admin"])
+            ->name("admin.")
+            ->prefix("admin")
+            ->group(module_path('RolePermission',"/Routes/admin.php"));
     }
 
     /**
@@ -77,6 +80,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('User', '/Routes/api.php'));
+            ->group(module_path('RolePermission', '/Routes/api.php'));
     }
 }

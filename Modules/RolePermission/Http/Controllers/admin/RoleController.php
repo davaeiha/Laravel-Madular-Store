@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\RolePermission\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\User;
+
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,9 +13,14 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Modules\RolePermission\Entities\Permission;
+use Modules\RolePermission\Entities\Role;
 
 class RoleController extends Controller
 {
+    /**
+     * specifying Gates
+     */
     public function __construct()
     {
         $this->middleware("can:show-roles")->only(["index"]);
@@ -43,7 +46,7 @@ class RoleController extends Controller
             $roles = Role::latest()->paginate(20);
         }
 
-        return view("admin.roles.all",["roles"=>$roles]);
+        return view("rolepermission::admin.roles.all",["roles"=>$roles]);
     }
 
     /**
@@ -54,7 +57,7 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view("admin.roles.create",["permissions"=>$permissions]);
+        return view("rolepermission::admin.roles.create",["permissions"=>$permissions]);
     }
 
     /**
@@ -71,8 +74,6 @@ class RoleController extends Controller
             "permissions"=>["required","array"]
         ]);
 
-
-
         $role = Role::create([
             "name"=>$validatedData["name"],
             "label"=>$validatedData["label"],
@@ -80,27 +81,10 @@ class RoleController extends Controller
 
         $role->permissions()->sync($validatedData["permissions"]);
 
-//        foreach($request->permissions as $permissionId){
-//            DB::table("permission_role")->insert([
-//                "permission_id"=>$permissionId,
-//                "role_id"=>$role->id
-//            ]);
-//        }
-
         alert()->success("دسترسی مورد نظر با موفقیت ایجاد شد")->closeOnClickOutside();
         return redirect(route("admin.roles.index"));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Role $role
-     * @return void
-     */
-    public function show(Role $role)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -110,8 +94,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-
-        return view("admin.roles.edit",["role"=>$role]);
+        return view("rolepermission::admin.roles.edit",["role"=>$role]);
     }
 
     /**

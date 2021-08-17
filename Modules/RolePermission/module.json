@@ -1,0 +1,14 @@
+{
+    "name": "RolePermission",
+    "alias": "rolepermission",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "canDisable": false,
+    "providers": [
+        "Modules\\RolePermission\\Providers\\RolePermissionServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

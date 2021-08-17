@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\User\Entities\User;
 
 class UserPolicy
 {
@@ -19,11 +20,13 @@ class UserPolicy
         //
     }
 
-    public function edit(User $user,$currentUser){
+    public function edit(User $user,$currentUser): bool
+    {
         return $user->id == $currentUser->id;
     }
 
-    public function delete(User $user,$currentUser){
+    public function delete(User $user,$currentUser): bool
+    {
         return $user->id == $currentUser->id;
     }
 

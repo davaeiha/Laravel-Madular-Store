@@ -1,20 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\RolePermission\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Permission;
-use App\Models\User;
+
 use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Modules\RolePermission\Entities\Permission;
 
 class PermissionController extends Controller
 {
-
+    /**
+     * specifying Gates
+     */
     public function __construct()
     {
         $this->middleware("can:show-permissions")->only(["index"]);
@@ -40,7 +42,7 @@ class PermissionController extends Controller
             $permissions = Permission::latest()->paginate(20);
         }
 
-        return view("admin.permissions.all",["permissions"=>$permissions]);
+        return view("rolepermission::admin.permissions.all",["permissions"=>$permissions]);
     }
 
     /**
@@ -50,7 +52,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view("admin.permissions.create");
+        return view("rolepermission::admin.permissions.create");
     }
 
     /**
@@ -71,17 +73,6 @@ class PermissionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Permission $permission
-     * @return void
-     */
-    public function show(Permission $permission)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Permission $permission
@@ -89,7 +80,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        return view("admin.permissions.edit",["permission"=>$permission]);
+        return view("rolepermission::admin.permissions.edit",["permission"=>$permission]);
     }
 
     /**
@@ -122,6 +113,7 @@ class PermissionController extends Controller
     public function destroy(Permission $permission): RedirectResponse
     {
         $permission->delete();
+        alert()->success("دسترسی مورد نظر با موفقیت حذف گردید")->closeOnClickOutside();
         return back();
     }
 }

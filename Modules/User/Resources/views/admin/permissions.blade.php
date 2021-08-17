@@ -25,7 +25,7 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    @include("resources.views.layouts.errors")
+    @include("layouts.errors")
 
     <form class="form-horizontal" method="post" action="{{route("admin.users.permissions.store",["user"=>$user->id])}}">
         @csrf
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="roles"  class="col-sm-2 control-label">مقام ها</label>
                 <select name="roles[]" id="roles" class="form-control" multiple>
-                    @foreach(\App\Models\Role::all() as $role)
+                    @foreach(\Modules\RolePermission\Entities\Role::all() as $role)
                         <option value="{{$role->id}}" name="{{$role->name}}" {{$user->roles->contains($role) ? "selected" : ""}}>{{$role->label}}</option>
                     @endforeach
                 </select>

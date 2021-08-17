@@ -19,8 +19,7 @@ Route::get('/' , function() {
 
 
 
-Route::resource("permission", PermissionController::class);
-Route::resource("roles", RoleController::class);
+
 
 Route::resource('products',ProductController::class);
 
