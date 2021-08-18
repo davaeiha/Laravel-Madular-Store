@@ -3,5 +3,6 @@
     "Cart": true,
     "Management": true,
     "User": true,
-    "RolePermission": true
+    "RolePermission": true,
+    "CategoryProduct": true
 }

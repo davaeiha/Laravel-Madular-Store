@@ -4,7 +4,7 @@
     "description": "ماژولی برای اعمال تخفیف بر روی محصولات و دسته بندی هایی که مشتری قصد خرید آن را دارد",
     "image": "public/images/Modules/discount.jpg",
     "keywords": [],
-    "priority": 2,
+    "priority": 3,
     "providers": [
         "Modules\\Discount\\Providers\\DiscountServiceProvider"
     ],

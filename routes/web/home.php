@@ -122,19 +122,36 @@ Route::middleware(['auth'])->prefix("profile")->group(function (){
     Route::get('/orders/{order}/pay',[OrderController::class,"payment"])->name('profile.order.pay');
 
 });
-//products route
-Route::get('/products',[ProductController::class,"index"])->name("products.all");
-Route::get('/products/{product}',[ProductController::class,'single'])->name("products.single");
+
 //article routes
 
 //comment routes
-Route::post("/comments/product/{product}",[HomeController::class,"comment"])->name("send.comment");
 
-//cart routs
-//Route::get('cart',[CartController::class,'showCart']);
-//Route::delete('cart/remove/{id}',[CartController::class,"removeCart"])->name("cart.remove");
-//Route::post("cart/add/{product}",[CartController::class,"addToCart"])->name("cart.add");
-//Route::patch("/cart/quantity/change",[CartController::class,"changeQuantity"])->name('cart.update');
+//Route::post('/comments',[HomeController::class,'comment'])->name('send.comment');
+
+Route::post('/comments',function (\Illuminate\Http\Request $request){
+    if(!$request->ajax()){
+        return response()->json([
+            "status"=>"just ajax request"
+        ]);
+    }
+
+    $validatedData  = $request->validate([
+        "comment"=>"required",
+        "commentable_id"=>"required",
+        "commentable_type"=>"required",
+        "parent_id"=>"required"
+    ]);
+
+    $request->user()->comments()->create($validatedData);
+    alert()->success("نظر شما با موفقیت ثبت شد");
+//         return back();
+
+    return response()->json([
+        'status'=>'success'
+    ]);
+})->name('send.comment');
+
 
 //order and payment routes
 

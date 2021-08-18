@@ -21,12 +21,12 @@ Route::get('/' , function() {
 
 
 
-Route::resource('products',ProductController::class);
+
 
 Route::get("comments/unapproved",[CommentController::class,"unapprovedComments"])->name("comments.unapproved");
 Route::resource('comments', CommentController::class)->only(["index","destroy","update"]);
 
-Route::resource("categories",CategoryController::class);
+
 
 Route::resource('orders', OrderController::class);
 Route::get('orders/{order}/payments',[OrderController::class,'payments'])->name('order.payments');

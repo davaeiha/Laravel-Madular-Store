@@ -2,13 +2,13 @@
 
 namespace Modules\RolePermission\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
 
 use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Modules\RolePermission\Entities\Permission;
 
