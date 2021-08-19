@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Gallery\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Product;
-use App\Models\ProductGallery;
-use Dotenv\Validator;
-use http\Exception\BadConversionException;
-use Illuminate\Auth\Events\Validated;
+
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Validator as Validation;
+use Modules\CategoryProduct\Entities\Product;
+use Modules\Gallery\Entities\ProductGallery;
 
 class ProductGalleryController extends Controller
 {
@@ -27,7 +23,7 @@ class ProductGalleryController extends Controller
     public function index(Product $product)
     {
         $images = $product->images()->latest()->paginate(10);
-        return view("admin.products.gallery.all",compact(['product','images']));
+        return \view("gallery::admin.all",compact(['product','images']));
     }
 
     /**
@@ -37,14 +33,14 @@ class ProductGalleryController extends Controller
      */
     public function create(Product $product)
     {
-
-        return \view("admin.products.gallery.create",compact('product'));
+        return \view("gallery::admin.create",compact('product'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @param Product $product
      * @return Application|RedirectResponse|Redirector
      */
     public function store(Request $request,Product $product)
@@ -79,8 +75,7 @@ class ProductGalleryController extends Controller
      */
     public function edit(Product $product,ProductGallery $gallery)
     {
-
-        return \view("admin.products.gallery.edit",compact(['product','gallery']));
+        return \view("gallery::admin.edit",compact(['product','gallery']));
     }
 
     /**
@@ -112,6 +107,7 @@ class ProductGalleryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Product $product
+     * @param ProductGallery $gallery
      * @return RedirectResponse
      */
     public function destroy(Product $product,ProductGallery $gallery): RedirectResponse

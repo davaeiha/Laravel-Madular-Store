@@ -3,16 +3,12 @@
 use App\Http\Controllers\Auth\AuthGitController;
 use App\Http\Controllers\Auth\AuthGoogleController;
 use App\Http\Controllers\Auth\VerifyPhoneController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentController1;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Profile\OrderController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Comment;
-use App\Models\Product;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

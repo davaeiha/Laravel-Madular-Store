@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Discount\Providers;
+namespace Modules\Gallery\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Modules\Discount\Http\Controllers';
+    protected $moduleNamespace = 'Modules\Gallery\Http\Controllers';
 
     /**
      * Called before routes are registered.
@@ -34,10 +34,8 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
         $this->mapAdminRoutes();
+        $this->mapWebRoutes();
     }
 
     /**
@@ -51,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Discount', '/Routes/web.php'));
+            ->group(module_path('Gallery', '/Routes/web.php'));
     }
 
     /**
@@ -62,7 +60,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(["web","auth","auth.admin"])
             ->name("admin.")
             ->prefix("admin")
-            ->group(module_path('Discount',"/Routes/admin.php"));
+            ->group(module_path('Gallery',"/Routes/admin.php"));
     }
 
     /**
@@ -77,6 +75,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Discount', '/Routes/api.php'));
+            ->group(module_path('Gallery', '/Routes/api.php'));
     }
 }

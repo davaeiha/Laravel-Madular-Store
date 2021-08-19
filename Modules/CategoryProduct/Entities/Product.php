@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Modules\Comment\Entities\Comment;
 use Modules\Discount\Entities\Discount;
+use Modules\Gallery\Entities\ProductGallery;
 use Modules\User\Entities\User;
 
 /**

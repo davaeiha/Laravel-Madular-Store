@@ -10,7 +10,6 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">تصاویر</h3>
-
                     <div class="card-tools d-flex">
                         <div class="btn-group-sm mr-1">
                             <a href="{{ route('admin.product.gallery.create' , ['product' => $product->id]) }}" class="btn btn-info">ثبت تصویر جدید</a>
@@ -30,7 +29,7 @@
                                     @csrf
                                 </form>
                                 <a href="{{ route('admin.product.gallery.edit' , ['product' => $product->id , 'gallery' => $image->id]) }}" class="btn btn-sm btn-primary">ویرایش</a>
-                                <a href="{{ URL::temporarySignedRoute('download.file',now()->addMinute(1),['file'=>$image->getFile(),'path'=>$image->path()]) }}" class="btn btn-sm btn-dark" target="_blank">دانلود</a>
+{{--                                <a href="{{ URL::temporarySignedRoute('download.file',now()->addMinute(1),['file'=>$image->getFile(),'path'=>$image->path()]) }}" class="btn btn-sm btn-dark" target="_blank">دانلود</a>--}}
                                 <a href="#" class="btn btn-sm btn-danger" onclick="document.getElementById('image-{{ $image->id }}').submit()">حذف</a>
                             </div>
                         @endforeach
@@ -38,7 +37,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    {{ $images->render() }}
+{{--                    {{ $images->render() }}--}}
                 </div>
             </div>
             <!-- /.card -->
