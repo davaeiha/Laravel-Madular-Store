@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -45,43 +46,6 @@ Route::get('/', function () {
 //    return $product->comments()->get();
 //    \auth()->loginUsingId(1);
     return view('welcome');
-});
-
-Route::get("/test",function(){
-//    $product = \App\Models\Product::find(4);
-    // adding comment by user
-    /*\auth()->user()->comments()->create([
-        "commentable_id"=>$product->id,
-        "commentable_type"=>get_class($product),
-        "user_id"=>auth()->user()->id,
-        "comment"=>"this is the first comment",
-    ]);*/
-
-    //adding comment by product
-    /*$product->comments()->create([
-        "user_id"=> auth()->user()->id,
-        "comment"=>"this is the second comment",
-    ]);*/
-
-    $module = Module::find('discount');
-    dd(Module::allEnabled());
-
-    dd(session('cart'));
-    $category = \App\Models\Category::findOrFail(5);
-    dd($category->products);
-    $image = \App\Models\ProductGallery::find(18);
-    dd($image->path());
-//    dd($image->getFile());
-    dd(\App\Helpers\cart\Cart::all());
-   $category = \App\Models\Category::find(13);
-//   dd($category->child);
-    dd($category->child->isEmpty());
-
-   dd(is_null($category->child));
-   $category->child()->each(function ($category){
-      dd($category->is_empry());
-   });
-
 });
 
 Auth::routes(['verify'=> true]);
@@ -129,28 +93,6 @@ Route::middleware(['auth'])->prefix("profile")->group(function (){
 
 //Route::post('/comments',[HomeController::class,'comment'])->name('send.comment');
 
-Route::post('/comments',function (\Illuminate\Http\Request $request){
-    if(!$request->ajax()){
-        return response()->json([
-            "status"=>"just ajax request"
-        ]);
-    }
-
-    $validatedData  = $request->validate([
-        "comment"=>"required",
-        "commentable_id"=>"required",
-        "commentable_type"=>"required",
-        "parent_id"=>"required"
-    ]);
-
-    $request->user()->comments()->create($validatedData);
-    alert()->success("نظر شما با موفقیت ثبت شد");
-//         return back();
-
-    return response()->json([
-        'status'=>'success'
-    ]);
-})->name('send.comment');
 
 
 //order and payment routes

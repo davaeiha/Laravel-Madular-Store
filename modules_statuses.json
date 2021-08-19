@@ -4,5 +4,6 @@
     "Management": true,
     "User": true,
     "RolePermission": true,
-    "CategoryProduct": true
+    "CategoryProduct": true,
+    "Comment": true
 }

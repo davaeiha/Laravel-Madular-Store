@@ -23,8 +23,6 @@ Route::get('/' , function() {
 
 
 
-Route::get("comments/unapproved",[CommentController::class,"unapprovedComments"])->name("comments.unapproved");
-Route::resource('comments', CommentController::class)->only(["index","destroy","update"]);
 
 
 

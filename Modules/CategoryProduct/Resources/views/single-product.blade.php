@@ -36,7 +36,7 @@
 
             $.ajax({
                 type : 'POST',
-                url : "/comments",
+                url : "{{route('send.comment')}}",
                 data : JSON.stringify(data),
                 success : function(data) {
                     console.log(data);

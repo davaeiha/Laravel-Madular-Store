@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Comment\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Comment;
+
+
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
+use Modules\Comment\Entities\Comment;
 
-class CommentController extends Controller
+class CommentController extends  Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,22 +23,28 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::where("approved",1)->latest()->paginate(20);
-        return view("admin.comments.all",["comments"=>$comments]);
+        return view("comment::admin.all",["comments"=>$comments]);
     }
 
-    public function unapprovedComments(){
+    /**
+     * go to unapproved comments page
+     *
+     * @return Application|Factory|View
+     */
+    public function unapprovedComments()
+    {
         $comments = Comment::where("approved",0)->latest()->paginate(20);
-        return \view("admin.comments.unapproved",compact("comments"));
+        return \view("comment::admin.unapproved",compact("comments"));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param Request $request
+     * @param Comment $comment
+     * @return RedirectResponse
      */
-    public function update(Request $request,Comment $comment)
+    public function update(Request $request,Comment $comment): RedirectResponse
     {
         $comment->update([
             "approved"=>1
