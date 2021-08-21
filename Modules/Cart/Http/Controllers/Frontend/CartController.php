@@ -11,8 +11,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Cart\Helpers\Cart;
-use App\Models\Product;
 use Illuminate\Http\Request;
+use Modules\CategoryProduct\Entities\Product;
 
 class CartController extends Controller
 {

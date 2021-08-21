@@ -9,7 +9,7 @@
                     @method('delete')
                 </form>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('cate-{{ $cate->id }}-delete').submit()" class="badge badge-danger">حذف</a>
-                <a href="{{ route('admin.categories.edit' , $cate->id) }}" class="badge badge-primary">ویرایش</a>
+                <a href="{{ route('admin.categories.edit' , ['category' => $cate->id]) }}" class="badge badge-primary">ویرایش</a>
                 <a href="{{ route('admin.categories.create') }}?parent={{ $cate->id }}" class="badge badge-warning">ثبت زیر دسته</a>
             </div>
         </div>

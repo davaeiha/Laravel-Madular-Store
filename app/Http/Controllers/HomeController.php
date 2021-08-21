@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use http\Env\Response;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Modules\CategoryProduct\Entities\Product;
 
 class HomeController extends Controller
 {
@@ -29,29 +28,28 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function comment(Request $request){
-
-        if(!$request->ajax()){
-            return response()->json([
-                "status"=>"just ajax request"
-            ]);
-        }
-
-
-        $validatedData  = $request->validate([
-            "comment"=>"required",
-            "commentable_id"=>"required",
-            "commentable_type"=>"required",
-            "parent_id"=>"required"
-        ]);
-
-        if($validatedData["parent_id"] != 0){
-
-        }
-
-        $request->user()->comments()->create($validatedData);
-        alert()->success("نظر شما با موفقیت ثبت شد");
-         return back();
-
+    public function comment(Request $request): \Illuminate\Http\JsonResponse
+    {
+        return 'ok';
+//        if(!$request->ajax()){
+//            return response()->json([
+//                "status"=>"just ajax request"
+//            ]);
+//        }
+//
+//        $validatedData  = $request->validate([
+//            "comment"=>"required",
+//            "commentable_id"=>"required",
+//            "commentable_type"=>"required",
+//            "parent_id"=>"required"
+//        ]);
+//
+//        $request->user()->comments()->create($validatedData);
+//        alert()->success("نظر شما با موفقیت ثبت شد");
+////         return back();
+//
+//        return response()->json([
+//            'status'=>'success'
+//        ]);
     }
 }

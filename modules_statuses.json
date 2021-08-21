@@ -2,5 +2,10 @@
     "Discount": true,
     "Cart": true,
     "Management": true,
-    "User": true
+    "User": true,
+    "RolePermission": true,
+    "CategoryProduct": true,
+    "Comment": true,
+    "Gallery": true,
+    "OrderPayment": true
 }

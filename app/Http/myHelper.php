@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 if(!function_exists("isActive")){
-    function isActive(array $routeNames,string $bootstrapOption="active"){
+    function isActive(array $routeNames,string $bootstrapOption="active"): string
+    {
         return in_array(Route::currentRouteName(),$routeNames)  ? $bootstrapOption : '';
     }
 }
@@ -37,7 +38,8 @@ if(!function_exists("dateAgo")){
 }
 
 if(!function_exists("isUrl")){
-    function isUrl(string $route,string $bootstrapOption="active"){
+    function isUrl(string $route,string $bootstrapOption="active"): string
+    {
         return request()->fullUrl() == $route ? $bootstrapOption : "";
     }
 }

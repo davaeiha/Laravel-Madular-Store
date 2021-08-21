@@ -3,13 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Order;
-use App\Models\Permission;
-use App\Models\User;
+
 use App\Policies\OrderPlicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Modules\RolePermission\Entities\Permission;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -32,18 +32,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        /*Gate way*/
-//        Gate::define("edit-user",function( $user,$currentUser){
-//            return $user->id == $currentUser->id;
-//        });
-//        $users = User::all();
-//        foreach ($users as $user){
-//            foreach ($user->permissions()->pluck("name") as $name){
-//                Gate::define($name,function ($userr,$currentUser){
-//                    return $userr->id == $currentUser->id;
-//                });
-//            }
-//        }
 
         Gate::before(function($user){
             if($user->is_supervisor()){
@@ -53,7 +41,6 @@ class AuthServiceProvider extends ServiceProvider
 
         foreach(Permission::all() as $permission){
             Gate::define($permission->name,function ($user) use ($permission) {
-//                return !! $user->hasPermission($permission) || $user->hasRoleByPermission($permission);
                 return $user->userAllowed($permission);
             });
         }

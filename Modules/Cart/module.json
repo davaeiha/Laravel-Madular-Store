@@ -4,7 +4,7 @@
     "description": "ماژولی برای نمایش سبد خرید محصولاتی که مشتری قصد خرید آن را دارد.",
     "image": "public/images/Modules/Cart/cart.jpg",
     "keywords": [],
-    "priority":1,
+    "priority":2,
     "providers": [
         "Modules\\Cart\\Providers\\CartServiceProvider"
     ],

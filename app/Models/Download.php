@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\URL;
+use Modules\Gallery\Entities\ProductGallery;
+use Modules\User\Entities\User;
 
 class Download extends Model
 {
@@ -24,7 +27,8 @@ class Download extends Model
         return URL::temporarySignedRoute('download.file',now()->addMinute(2),['file'=>ProductGallery::getFile()]);
     }
 
-    public function user(){
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
