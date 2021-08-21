@@ -38,7 +38,8 @@ if(!function_exists("dateAgo")){
 }
 
 if(!function_exists("isUrl")){
-    function isUrl(string $route,string $bootstrapOption="active"){
+    function isUrl(string $route,string $bootstrapOption="active"): string
+    {
         return request()->fullUrl() == $route ? $bootstrapOption : "";
     }
 }

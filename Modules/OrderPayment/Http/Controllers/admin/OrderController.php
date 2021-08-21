@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\OrderPayment\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\Rule;
+use Modules\OrderPayment\Entities\Order;
 
 class OrderController extends Controller
 {
@@ -30,10 +29,10 @@ class OrderController extends Controller
                     ->latest('created_at')
                     ->paginate(30);
         }else{
-            $orders = Order::whereStatus(\request('type'))->latest()->paginate();
+            $orders = Order::whereStatus(\request('type'))->latest()->paginate(30);
         }
 
-        return view('admin.orders.all',['orders'=>$orders]);
+        return view('orderpayment::admin.orders.all',['orders'=>$orders]);
     }
 
     /**
@@ -45,12 +44,12 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $products = $order->products;
-        return \view('admin.orders.details',['products'=>$products,'order'=>$order]);
+        return \view('orderpayment::admin.orders.details',['products'=>$products,'order'=>$order]);
     }
 
     public function payments(Order $order){
         $payments = $order->payments()->latest()->paginate(15);
-        return \view('admin.orders.payments',compact(['order','payments']));
+        return \view('orderpayment::admin.orders.payments',compact(['order','payments']));
     }
 
     /**
@@ -62,7 +61,7 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
 
-        return \view("admin.orders.edit",compact('order'));
+        return \view("orderpayment::admin.orders.edit",compact('order'));
     }
 
     /**

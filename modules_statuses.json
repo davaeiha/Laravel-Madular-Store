@@ -6,5 +6,6 @@
     "RolePermission": true,
     "CategoryProduct": true,
     "Comment": true,
-    "Gallery": true
+    "Gallery": true,
+    "OrderPayment": true
 }

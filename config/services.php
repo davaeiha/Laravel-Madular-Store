@@ -42,8 +42,6 @@ return [
         'redirect' => 'http://localhost:8000/auth/github/callback',
     ],
 
-    'payping'=>[
-        'token' =>env('PAYPING_TOKEN'),
-    ],
+
 
 ];

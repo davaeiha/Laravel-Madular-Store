@@ -1,26 +1,49 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace Modules\OrderPayment\Http\Controllers\profile;
 
-use App\Helpers\cart\Cart;
-use App\Http\Controllers\Controller;
-use App\Models\Order;
+
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Modules\OrderPayment\Entities\Order;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment as ShetabitPayment;
 
+/**
+ * @method authorize(string $string, Order $order)
+ */
 class OrderController extends Controller
 {
+    /**
+     * show all the orders that user has made
+     *
+     * @return Application|Factory|View
+     */
     public function index(){
         $orders = auth()->user()->orders()->latest('created_at')->paginate(10) ;
-        return view('profile.orders',compact('orders'));
+        return view('orderpayment::profile.orders',compact('orders'));
     }
 
+    /**
+     * shows the details of the order
+     *
+     * @param Order $order
+     * @return Application|Factory|View
+     */
     public function showDetails(Order $order){
-        $this->authorize('view',$order);
-        return view('profile.orderDetails',compact('order'));
+        return view('orderpayment::profile.orderDetails',compact('order'));
     }
 
+    /**
+     * deciding to pay an unpaid order
+     *
+     * @param Order $order
+     * @return mixed
+     * @throws \Exception
+     */
     public function payment(Order $order){
 
 
@@ -37,4 +60,5 @@ class OrderController extends Controller
 
         })->pay()->render();
     }
+
 }

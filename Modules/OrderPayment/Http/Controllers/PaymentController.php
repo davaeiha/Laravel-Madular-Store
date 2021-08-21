@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\OrderPayment\Http\Controllers;
 
-use App\Helpers\cart\Cart;
-use App\Models\Payment;
+
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\In;
+use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
+use Modules\Cart\Helpers\Cart;
+use Modules\OrderPayment\Entities\Payment;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment as ShetabitPayment;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
@@ -14,6 +17,11 @@ use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 class PaymentController extends Controller
 {
     /**
+     * making res_number
+     * register order in database
+     * register payment in database
+     * go to payment port
+     *
      * @throws \Exception
      */
     public function payment(){
@@ -21,7 +29,6 @@ class PaymentController extends Controller
         $carts = Cart::all();
 
         if($carts->count()){
-            $res_number = Str::random();
             $price = $carts->sum(function($cart){
                 return $cart['price'] * $cart['quantity'];
             });
@@ -56,20 +63,27 @@ class PaymentController extends Controller
 
     }
 
+    /**
+     * callback url check:
+     * if payment is successful or not
+     *
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
     public function callback(Request $request){
-        $payping = Payment::where('res_number',$request->clientrefid)->firstOrFail();
+        $paying = Payment::where('res_number',$request->clientrefid)->firstOrFail();
 
         try {
+            //amount must be the price
+//            $paying->order->price
             $receipt = ShetabitPayment::amount(100)->transactionId($request->clientrefid)->verify();
 
-//            dd($receipt);
-
             // You can show payment referenceId to the user.
-            $payping->update([
+            $paying->update([
                 "status"=>1,
             ]);
 
-            $payping->order()->update([
+            $paying->order()->update([
                 "status"=>"paid"
             ]);
 

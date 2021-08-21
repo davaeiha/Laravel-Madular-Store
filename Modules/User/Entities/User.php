@@ -1,7 +1,6 @@
 <?php namespace Modules\User\Entities;
 
 
-use App\Models\Comment;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modules\CategoryProduct\Entities\Product;
+use Modules\Comment\Entities\Comment;
 use Modules\Discount\Entities\Discount;
+use Modules\OrderPayment\Entities\Order;
 use Modules\RolePermission\Entities\Permission;
 use Modules\RolePermission\Entities\Role;
 
