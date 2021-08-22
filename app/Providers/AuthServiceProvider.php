@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\Order;
+
 
 use App\Policies\OrderPlicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Modules\OrderPayment\Entities\Order;
 use Modules\RolePermission\Entities\Permission;
 
 class AuthServiceProvider extends ServiceProvider
