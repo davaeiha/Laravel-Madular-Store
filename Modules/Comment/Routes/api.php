@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Comment\Http\Controllers\Api\v1\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/comment', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/comment', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::middleware('auth:api')->prefix('v1')->group(function (){
+    Route::post('/comment/{product}',[CommentController::class,'comment']);
 });
