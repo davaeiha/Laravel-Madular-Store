@@ -15,10 +15,6 @@ use Modules\Comment\Http\Controllers\Api\v1\CommentController;
 |
 */
 
-//Route::middleware('auth:api')->get('/comment', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::middleware('auth:api')->prefix('v1')->group(function (){
     Route::post('/comment/{product}',[CommentController::class,'comment']);
 });
