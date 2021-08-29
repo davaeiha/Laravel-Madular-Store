@@ -20,6 +20,7 @@ use Modules\User\Entities\User;
  * @property mixed price
  * @method static where(string $string, string $string1, string $string2)
  * @method static latest()
+ * @method static paginate(int $int)
  */
 class Product extends Model
 {
@@ -80,7 +81,7 @@ class Product extends Model
      */
     public function attributes(): BelongsToMany
     {
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsToMany(Attribute::class)->withPivot('value_id');
     }
 
     /**

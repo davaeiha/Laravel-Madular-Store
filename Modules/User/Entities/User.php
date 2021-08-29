@@ -1,5 +1,6 @@
 <?php namespace Modules\User\Entities;
 
+use App\Models\ActiveCode;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

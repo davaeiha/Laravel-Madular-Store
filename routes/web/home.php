@@ -7,6 +7,7 @@ use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $product = \Modules\CategoryProduct\Entities\Product::find(12);
+
+    $attr = \Modules\CategoryProduct\Entities\Attribute::find(1);
+
+     $product->attributes->each(function ($attr){
+         dd($attr->pivot->value_id);
+     });
     return view('welcome');
 });
 

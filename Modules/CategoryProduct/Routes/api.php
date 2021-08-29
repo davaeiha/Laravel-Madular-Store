@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\CategoryProduct\Http\Controllers\Api\v1\Frontend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/categoryproduct', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function (){
+    Route::get('/products',[ProductController::class,"index"])->name("products.all");
+    Route::get('/products/{product}',[ProductController::class,'single'])->name("products.single");
 });
+
