@@ -3,7 +3,7 @@
 namespace Modules\CategoryProduct\Http\Controllers\Admin;
 
 
-use App\Models\Attribute;
+
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\Rule;
+use Modules\CategoryProduct\Entities\Attribute;
 use Modules\CategoryProduct\Entities\Product;
 
 class ProductController extends Controller

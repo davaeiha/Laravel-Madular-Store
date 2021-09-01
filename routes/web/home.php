@@ -3,7 +3,6 @@
 
 use App\Http\Controllers\Auth\AuthGoogleController;
 use App\Http\Controllers\Auth\VerifyPhoneController;
-use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,13 +20,6 @@ use Illuminate\Support\Facades\Redis;
 */
 
 Route::get('/', function () {
-    $product = \Modules\CategoryProduct\Entities\Product::find(12);
-
-    $attr = \Modules\CategoryProduct\Entities\Attribute::find(1);
-
-     $product->attributes->each(function ($attr){
-         dd($attr->pivot->value_id);
-     });
     return view('welcome');
 });
 
@@ -64,45 +56,8 @@ Route::middleware(['auth'])->prefix("profile")->group(function (){
 });
 
 
-//Route::post('/comments',[HomeController::class,'comment'])->name('send.comment');
-
-
-
-
-
 Route::get('/wallet',function (){
     return "this is Hermodr wallet page";
 })->middleware(['auth','password.confirm']);
 
 
-
-//
-//Route::get("/download/{file}",function ($file){
-//
-////    dd(Storage::disk('public')->exists($file));
-//    $fileDirection =storage_path('app\public\files\\'.$file);
-//    try {
-//        if(Storage::disk('public')->exists('files\\'.$file)){
-////            Storage::download(publi$file);
-//            dd(url()->previous());
-//            return Storage::disk('public')->download('files\\'.$file);
-//            return response()->download(storage_path('app\public\files\\'.$file));
-//        }
-//    }catch(\Exception $e){
-//
-//        echo $e->getMessage();
-//    }
-//    dd(2);
-////    Storage::download($fileDirection,"آبی");
-//});
-
-//
-//Route::get('download',function (){
-//    return URL::signedRoute("download.safe",["file"=>'blue.jpg']);
-//});
-//
-//Route::get('download/{file}',function ($file){
-//    return Storage::disk()
-//})->name('download.safe');
-
-Route::get('download/{file}',[DownloadController::class,"downloadPublic"])->name('download.file');

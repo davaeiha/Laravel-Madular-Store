@@ -1,9 +1,7 @@
-<?php
-
-namespace Modules\User\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Modules\RolePermission\Entities\Role;
-use Modules\User\Entities\User;
+
 
 class PermissionController extends Controller
 {
@@ -29,7 +27,7 @@ class PermissionController extends Controller
      * @return Application|Factory|View
      */
     public function create(User $user){
-        return view("user::admin.permissions",["user"=>$user]);
+        return view("admin.users.permissions",["user"=>$user]);
     }
 
     /**

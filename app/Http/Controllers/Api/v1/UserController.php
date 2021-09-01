@@ -1,7 +1,6 @@
-<?php
+<?php namespace App\Http\Controllers\Api\v1;
 
-namespace Modules\User\Http\Controllers\Api\v1;
-
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -9,7 +8,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Modules\User\Entities\User;
 use Modules\User\Transformers\Api\v1\User as UserResource;
 use Symfony\Component\HttpFoundation\Response;
 

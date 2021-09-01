@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveCode;
 
+use App\Models\User;
 use App\Notifications\LoginWebsiteNotification;
 use App\Providers\RouteServiceProvider;
 use App\Rules\recaptcha;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Modules\User\Entities\User;
+
 
 class LoginController extends Controller
 {

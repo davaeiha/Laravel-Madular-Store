@@ -12,7 +12,7 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    @include("resources.views.layouts.errors")
+    @include("layouts.errors")
     <form class="form-horizontal" method="post" action="{{route("admin.users.update",["user"=>$user->id])}}">
         @csrf
         @method("PATCH")

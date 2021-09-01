@@ -1,4 +1,4 @@
-<?php namespace Modules\User\Entities;
+<?php namespace App\Models;
 
 use App\Models\ActiveCode;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;

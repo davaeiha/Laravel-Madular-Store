@@ -1,9 +1,8 @@
-<?php
-
-namespace Modules\User\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
-use Modules\User\Entities\User;
+
 
 class UserController extends Controller
 {
@@ -60,7 +59,7 @@ class UserController extends Controller
             $users = User::where("is_supervisor", 0)->orWhere("is_staff", 0)->paginate(20);
         }
 
-        return view("user::admin.all",["users"=>$users]);
+        return view("admin.users.all",["users"=>$users]);
     }
 
     /**
@@ -70,7 +69,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("user::admin.create");
+        return view("admin.users.create");
     }
 
     /**
@@ -111,7 +110,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view("user::admin.edit",compact("user"));
+        return view("admin.users.edit",compact("user"));
     }
 
     /**
