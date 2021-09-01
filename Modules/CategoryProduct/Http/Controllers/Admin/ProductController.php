@@ -3,7 +3,6 @@
 namespace Modules\CategoryProduct\Http\Controllers\Admin;
 
 
-use App\Models\Attribute;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\Rule;
+use Modules\CategoryProduct\Entities\Attribute;
+use Modules\CategoryProduct\Entities\AttributeValue;
 use Modules\CategoryProduct\Entities\Product;
 
 class ProductController extends Controller
@@ -135,12 +136,34 @@ class ProductController extends Controller
             "price"=>["required","integer"],
             "inventory"=>["required","integer"],
             "category"=>["required","array"],
-            "image"=>["required"]
+            "image"=>["required"],
+            "attributes"=>['required','array','distinct']
         ]);
 
-        $product->update($validatedData);
+        $product->update([
+            'title'=>$validatedData['title'],
+            'description'=>$validatedData['description'],
+            'price'=>$validatedData['price'],
+            'inventory'=>$validatedData['inventory'],
+            'image'=>$validatedData['image'],
+        ]);
 
         $product->categories()->sync($validatedData["category"]);
+
+        $attributesCollection = collect($validatedData['attributes']);
+
+        $attributesCollection->each(function ($item) use ($product){
+            $attr = Attribute::firstOrCreate([
+                'name'=>$item['name']
+            ]);
+
+            $attrValue = $attr->values()->firstOrCreate([
+                'value'=>$item['value']
+            ]);
+
+            $product->attributes()->detach($attr->id);
+            $product->attributes()->attach($attr->id,['value_id'=>$attrValue->id]);
+        });
 
         alert()->success("محصول مورد نظر با موفقیت ویرایش شد")->closeOnClickOutside();
 

@@ -4,6 +4,8 @@ namespace Modules\CategoryProduct\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\CategoryProduct\Entities\AttributeValue;
+use Nwidart\Modules\Facades\Module;
 
 class CategoryProductServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,11 @@ class CategoryProductServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        Module::macro("productValue",function($productAttr){
+            $valueId = $productAttr->pivot->value_id;
+            return AttributeValue::find($valueId);
+        });
     }
 
     /**

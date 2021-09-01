@@ -71,10 +71,10 @@
                                  <select name="attributes[${id}][name]" onchange="changeAttributeValues(event, ${id});" class="attribute-select form-control">
                                     <option value="">انتخاب کنید</option>
                                     ${
-                    attributes.map(function(item) {
-                        return `<option value="${item}">${item}</option>`
-                    })
-                }
+                                        attributes.map(function(item) {
+                                            return `<option value="${item}">${item}</option>`
+                                        })
+                                    }
                                  </select>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             <div class="form-group">
                                  <label>مقدار ویژگی</label>
                                  <select name="attributes[${id}][value]" class="attribute-select form-control">
-                                        <option value="">انتخاب کنید</option>
+                                    <option value=""></option>
                                  </select>
                             </div>
                         </div>

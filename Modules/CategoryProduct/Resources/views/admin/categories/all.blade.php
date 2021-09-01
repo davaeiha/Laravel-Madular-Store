@@ -40,7 +40,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-                @include('admin.layout.categories' , ['categories' => $categories])
+                @include('categoryproduct::admin.layout.categories' , ['categories' => $categories])
             </div>
             <!-- /.card-body -->
 {{--            <div class="card-footer">--}}

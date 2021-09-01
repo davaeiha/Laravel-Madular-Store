@@ -14,7 +14,7 @@
             </div>
         </div>
         @if($cate->child->count())
-            @include('admin.layout.categories',['categories' => $cate->child])
+            @include('categoryproduct::admin.layout.categories',['categories' => $cate->child])
         @endif
     </li>
     @endforeach

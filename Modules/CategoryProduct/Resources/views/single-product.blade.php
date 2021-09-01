@@ -109,7 +109,7 @@
             </div>
         </div>
         @guest()
-            <div class="alert alert-warning mt-3"><a href="{{route("register")}}">برای ثبت نظر لطفا ثبت نام کنید</a></div>
+            <div class="alert alert-info mt-3"><a href="{{route("login")}}">برای ثبت نظر لطفا وارد سایت شوید</a></div>
         @endguest
         <div class="row">
             <div class="col">
@@ -119,7 +119,7 @@
                         <span class="btn btn-sm btn-primary" data-toggle="modal" data-target="#sendComment" data-id="0" data-type="product">ثبت نظر جدید</span>
                     @endauth
                 </div>
-               @include("layouts.comments",["comments"=>$product->comments()->where("parent_id",0)->get()])
+               @include("comment::layouts.comments",["comments"=>$product->comments()->where("parent_id",0)->get()])
             </div>
         </div>
     </div>

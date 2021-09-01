@@ -11,6 +11,7 @@ use Modules\User\Entities\User;
 
 /**
  * @method static where(string $string, int $int)
+ * @property mixed approved
  */
 class Comment extends Model
 {
@@ -62,6 +63,15 @@ class Comment extends Model
     public function childComments(): HasMany
     {
         return $this->hasMany(Comment::class,"parent_id","id");
+    }
+
+    /**
+     * show if a comment is approved
+     * @return bool
+     */
+    public function isApproved(): bool
+    {
+        return !! $this->approved ==1 ;
     }
 
 }

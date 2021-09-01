@@ -33,6 +33,9 @@ Route::post('/comments',function (Request $request){
 
     $request->user()->comments()->create($validatedData);
     alert()->success("نظر شما با موفقیت ثبت شد");
-    return back();
+
+    return response()->json([
+        'status'=>"successfully done"
+    ],200);
 
 })->name('send.comment');
