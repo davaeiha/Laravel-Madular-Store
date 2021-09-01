@@ -3,13 +3,14 @@
 namespace Modules\Discount\Entities;
 
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\CategoryProduct\Entities\Category;
 use Modules\CategoryProduct\Entities\Product;
 use Modules\Discount\Database\factories\DiscountFactory;
-use Modules\User\Entities\User;
+
 
 /**
  * @method static where(string $string, mixed $code)

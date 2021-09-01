@@ -3,6 +3,7 @@
 namespace Modules\CategoryProduct\Entities;
 
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,12 +15,13 @@ use Modules\Comment\Entities\Comment;
 use Modules\Discount\Entities\Discount;
 use Modules\Gallery\Entities\ProductGallery;
 use Modules\OrderPayment\Entities\Order;
-use Modules\User\Entities\User;
+
 
 /**
  * @property mixed price
  * @method static where(string $string, string $string1, string $string2)
  * @method static latest()
+ * @method static paginate(int $int)
  */
 class Product extends Model
 {

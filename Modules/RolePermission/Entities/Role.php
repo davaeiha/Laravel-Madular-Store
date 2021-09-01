@@ -1,9 +1,10 @@
 <?php namespace Modules\RolePermission\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Modules\User\Entities\User;
+
 
 /**
  * @method static where(string $string, string $string1, string $string2)

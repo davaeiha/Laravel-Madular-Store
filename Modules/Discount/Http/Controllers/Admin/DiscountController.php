@@ -2,7 +2,7 @@
 
 namespace Modules\Discount\Http\Controllers\Admin;
 
-use App\Models\Category;
+
 use App\Models\User;
 use Artesaos\SEOTools\SEOTools;
 use Illuminate\Contracts\Foundation\Application;
@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\Rule;
+use Modules\CategoryProduct\Entities\Category;
 use Modules\Discount\Entities\Discount;
 
 class DiscountController extends Controller
