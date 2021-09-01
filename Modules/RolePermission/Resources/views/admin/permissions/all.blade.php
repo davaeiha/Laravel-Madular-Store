@@ -66,7 +66,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                {{$permissions->appends(["search"=>request('search')])->render()}}
+                {{$permissions->links()}}
             </div>
         </div>
         <!-- /.card -->

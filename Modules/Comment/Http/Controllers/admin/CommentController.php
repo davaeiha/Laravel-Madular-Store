@@ -15,6 +15,13 @@ use Modules\Comment\Entities\Comment;
 
 class CommentController extends  Controller
 {
+    public function __construct()
+    {
+        $this->middleware("can:show-comments")->only(['index']);
+        $this->middleware("can:approve-comment")->only(['unapprovedComments','update']);
+        $this->middleware("can:delete-comment")->only(['destroy']);
+
+    }
     /**
      * Display a listing of the resource.
      *

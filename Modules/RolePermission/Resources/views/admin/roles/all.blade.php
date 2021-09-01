@@ -68,9 +68,9 @@
                 </table>
             </div>
             <!-- /.card-body -->
-{{--            <div class="card-footer">--}}
-{{--                {{$roles->render()}}--}}
-{{--            </div>--}}
+            <div class="card-footer">
+                {{$roles->links()}}
+            </div>
         </div>
         <!-- /.card -->
 

@@ -15,6 +15,14 @@ use Modules\Gallery\Entities\ProductGallery;
 
 class ProductGalleryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("can:show-gallery")->only(['index']);
+        $this->middleware("can:create-gallery")->only(['create','store']);
+        $this->middleware("can:edit-gallery")->only(['edit','update']);
+        $this->middleware("can:delete-gallery")->only(['destroy']);
+
+    }
     /**
      * Display a listing of the resource.
      *

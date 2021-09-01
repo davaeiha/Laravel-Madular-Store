@@ -14,6 +14,13 @@ use Modules\CategoryProduct\Entities\Category;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("can:show-categories")->only(['index']);
+        $this->middleware("can:create-category")->only(['create','store']);
+        $this->middleware("can:edit-category")->only(['edit','update']);
+        $this->middleware("can:delete-category")->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -72,9 +72,9 @@
                 </table>
             </div>
             <!-- /.card-body -->
-{{--            <div class="card-footer">--}}
-{{--                {{$discounts->render()}}--}}
-{{--            </div>--}}
+            <div class="card-footer">
+                {{$discounts->links()}}
+            </div>
         </div>
         <!-- /.card -->
 

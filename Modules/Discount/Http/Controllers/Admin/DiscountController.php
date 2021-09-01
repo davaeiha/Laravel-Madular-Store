@@ -16,6 +16,14 @@ use Modules\Discount\Entities\Discount;
 
 class DiscountController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("can:show-discounts")->only(['index']);
+        $this->middleware("can:create-discount")->only(['create','store']);
+        $this->middleware("can:edit-discount")->only(['edit','update']);
+        $this->middleware("can:delete-discount")->only(['destroy']);
+
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable

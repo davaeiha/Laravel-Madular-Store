@@ -43,9 +43,9 @@
                 @include('categoryproduct::admin.layout.categories' , ['categories' => $categories])
             </div>
             <!-- /.card-body -->
-{{--            <div class="card-footer">--}}
-{{--                {{$categories->render()}}--}}
-{{--            </div>--}}
+            <div class="card-footer">
+                {{$categories->links()}}
+            </div>
         </div>
         <!-- /.card -->
 

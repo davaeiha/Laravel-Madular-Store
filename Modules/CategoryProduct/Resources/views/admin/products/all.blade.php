@@ -71,9 +71,9 @@
                 </table>
             </div>
             <!-- /.card-body -->
-{{--            <div class="card-footer">--}}
-{{--                {{$products->render()}}--}}
-{{--            </div>--}}
+            <div class="card-footer">
+                {{$products->links()}}
+            </div>
         </div>
         <!-- /.card -->
 

@@ -133,7 +133,7 @@
                             <div class="mt-4">
                                 <form action="{{route('discount.destroy')}}" method="POST" id="delete-discount">
                                     @csrf
-               j                     @method('delete')
+                                     @method('delete')
                                 </form>
 
                                 <span class="">  کد تخفیف: <span class="text-info  "> {{\Modules\Cart\Helpers\Cart::getDiscount()->code}} </span> </span><br>

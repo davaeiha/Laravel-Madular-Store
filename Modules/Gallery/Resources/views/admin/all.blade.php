@@ -37,7 +37,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-{{--                    {{ $images->render() }}--}}
+                    {{ $images->links() }}
                 </div>
             </div>
             <!-- /.card -->
