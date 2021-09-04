@@ -1,5 +1,10 @@
 <?php
 
-return [
-    'name' => 'TwoFacAuth'
+return[
+
+    "type"=>[
+        "off"=>"Disable",
+        "sms"=>"SMS"
+    ]
+
 ];

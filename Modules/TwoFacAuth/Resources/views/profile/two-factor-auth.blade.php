@@ -19,7 +19,7 @@
         <div class="form-group">
             <label for="type">نوع:</label>
             <select name="type" class="form-control" id="">
-                @foreach(config('two-factor-auth.type') as $key => $value)
+                @foreach(config('twofacauth.type') as $key => $value)
                     <option value="{{$key}}" name="{{$key}}" {{old($key) || auth()->user()->select2FacAuth($key) ? 'selected' : ''}}>{{$value}}</option>
                 @endforeach
             </select>
