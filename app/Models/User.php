@@ -1,6 +1,6 @@
 <?php namespace App\Models;
 
-use App\Models\ActiveCode;
+
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +14,7 @@ use Modules\Discount\Entities\Discount;
 use Modules\OrderPayment\Entities\Order;
 use Modules\RolePermission\Entities\Permission;
 use Modules\RolePermission\Entities\Role;
+use Modules\TwoFacAuth\Entities\ActiveCode;
 
 /**
  * @method static where(string $string, int $int)

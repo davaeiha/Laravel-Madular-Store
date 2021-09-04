@@ -38,22 +38,7 @@ Route::post("/login/verifyPhone",[VerifyPhoneController::class,"postVerifyPhone"
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-//profile panel
-Route::middleware(['auth'])->prefix("profile")->group(function (){
 
-    Route::get('/',[ProfileController::class,'index'])->middleware("verified")->name('index');
-
-    //two factor auth
-    Route::get('/two-factor-auth',[ProfileController::class,"tFacAuth"])->name('two-fac-auth');
-    Route::post('/two-factor-auth',[ProfileController::class,'manage2factorAuth']);
-
-    //Token Form Routes
-    Route::get('/two-factor-auth/token',[ProfileController::class,"tokenForm"])->name("getTokenForm");
-    Route::post('/two-factor-auth/token',[ProfileController::class,"postTokenForm"])->name("postTokenForm");
-
-
-
-});
 
 
 Route::get('/wallet',function (){

@@ -1,4 +1,4 @@
-@extends('layouts.profLayout');
+@extends('layouts.profile');
 
 @section('in-box')
     <div class="card-body table-responsive p-0">

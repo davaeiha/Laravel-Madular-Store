@@ -1,4 +1,4 @@
-@extends('layouts.profLayout')
+@extends('layouts.profile')
 
 
 @section('in-box')
@@ -14,13 +14,11 @@
 
 
     @endif
-    <form action="{{url('two-factor-auth')}}" method="post">
+    <form action="{{route('profile.2FA.store')}}" method="post">
         @csrf
         <div class="form-group">
             <label for="type">نوع:</label>
             <select name="type" class="form-control" id="">
-{{--                <option value="off">off</option>--}}
-{{--                <option value="sms">sms</option>--}}
                 @foreach(config('two-factor-auth.type') as $key => $value)
                     <option value="{{$key}}" name="{{$key}}" {{old($key) || auth()->user()->select2FacAuth($key) ? 'selected' : ''}}>{{$value}}</option>
                 @endforeach
@@ -29,11 +27,11 @@
 
         <div class="form-group">
             <lable for="phone">شماره همراه:</lable>
-            <input type="text" class="form-control" name="phone" placeholder="please add your phone number" value="{{old('phone') ?? auth()->user()->phone_number}}">
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="please add your phone number" value="{{old('phone') ?? auth()->user()->phone_number}}">
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">
                 به روز رسانی
             </button>
         </div>

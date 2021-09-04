@@ -1,0 +1,13 @@
+{
+    "name": "TwoFacAuth",
+    "alias": "twofacauth",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\TwoFacAuth\\Providers\\TwoFacAuthServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

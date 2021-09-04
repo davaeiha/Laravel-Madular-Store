@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.profile')
 
 @section('content')
 
@@ -10,7 +10,7 @@
                         phone number verification
                     </div>
                     <div class="card-body">
-                        <form action="{{route("postTokenForm")}}" method="post">
+                        <form action="{{route('profile.verifyToken')}}" method="post">
                             @csrf
                             <div class="form-group col-form-label">
                                 <label for="token">Token:</label>

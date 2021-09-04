@@ -9,10 +9,10 @@
                     <div class="card-header">
                         <ul class="nav nav-pills card-header-pills">
                             <li class="nav-item ">
-                                <a href="{{route('index')}}" class="nav-link {{request()->is('profile') ? 'active' : ''}}">صفحه اصلی</a>
+                                <a href="{{route('profile.index')}}" class="nav-link {{request()->is('profile') ? 'active' : ''}}">صفحه اصلی</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('two-fac-auth')}}" class="nav-link {{request()->is('profile/two-factor-auth') ? 'active ' : ''}}">احراز دو مرحله ای</a>
+                                <a href="{{route('profile.2FA.show')}}" class="nav-link {{request()->is('profile/two-factor-auth') ? 'active ' : ''}}">احراز دو مرحله ای</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('profile.orders')}}" class="nav-link {{request()->is('profile/orders') ? 'active ' : ''}}">سفارشات</a>
