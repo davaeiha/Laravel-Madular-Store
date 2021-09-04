@@ -1,5 +1,7 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
+use Modules\TwoFacAuth\Http\Controllers\Auth\VerifyPhoneController;
+use Modules\TwoFacAuth\Http\Controllers\Profile\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,11 +14,7 @@
 */
 
 //profile panel
-use Illuminate\Support\Facades\Route;
-use Modules\TwoFacAuth\Http\Controllers\Profile\ProfileController;
-
 Route::middleware(['auth'])->name('profile.')->prefix("profile")->group(function (){
-
     //index profile
     Route::get('/',[ProfileController::class,'index'])->middleware("verified")->name('index');
 
@@ -27,5 +25,12 @@ Route::middleware(['auth'])->name('profile.')->prefix("profile")->group(function
     //Token Form Routes
     Route::get('/two-factor-auth/token',[ProfileController::class,"tokenForm"])->name("tokenForm");
     Route::post('/two-factor-auth/token',[ProfileController::class,"verifyTokenForm"])->name("verifyToken");
-
 });
+
+//phone verify login route
+Route::prefix('/login/verifyPhone')->name('login.')->group(function (){
+    Route::get('',[VerifyPhoneController::class,"tokenPhoneForm"])->name("tokenForm");
+    Route::post('',[VerifyPhoneController::class,"verifyTokenPhone"])->name("verifyTokenPhone");
+});
+
+

@@ -30,9 +30,7 @@ Route::get('/auth/google',[AuthGoogleController::class,"redirect"])->name('Googl
 Route::get('/auth/google/callback',[AuthGoogleController::class,"callback"]);
 
 
-//phone verify login route
-Route::get("/login/verifyPhone",[VerifyPhoneController::class,"getVerifyPhone"])->name("login.getVerifyPhone");
-Route::post("/login/verifyPhone",[VerifyPhoneController::class,"postVerifyPhone"])->name("login.postVerifyPhone");
+
 
 //home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

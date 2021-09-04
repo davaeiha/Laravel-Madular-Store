@@ -10,7 +10,7 @@
                         two factor authentication
                     </div>
                     <div class="card-body">
-                        <form action="{{route("login.postVerifyPhone")}}" method="post">
+                        <form action="{{route("login.verifyTokenPhone")}}" method="post">
                             @csrf
                             <div class="form-group col-form-label">
                                 <label for="token">Token:</label>

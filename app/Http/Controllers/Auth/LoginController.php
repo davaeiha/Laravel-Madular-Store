@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\ActiveCode;
-
 use App\Models\User;
 use App\Notifications\LoginWebsiteNotification;
 use App\Providers\RouteServiceProvider;
 use App\Rules\recaptcha;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Modules\TwoFacAuth\Entities\ActiveCode;
+use Modules\TwoFacAuth\Http\Controllers\Auth\TwoFactorAuth;
+use Nwidart\Modules\Facades\Module;
 
 
 class LoginController extends Controller
@@ -26,8 +27,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
-    use TwoFactorAuth;
+    use AuthenticatesUsers,TwoFactorAuth;
 
     /**
      * Where to redirect users after login.
@@ -54,30 +54,12 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     protected function authenticated(Request $request, $user)
     {
-        if($user->hasEnabledType()){
-            auth()->logout();
-            $request->session()->flash("auth",[
-                "using_sms"=>false,
-                "user_id"=>$user->id,
-                "remember"=>$request->has("remember")
-            ]);
+        if(in_array('TwoFacAuth',Module::allEnabled())){
+            return $this->loggedInVia2FA($request,$user);
         }
-
-        if( $user->type == "sms" ){
-            $request->session()->push("auth.using_sms",true);
-            //TODO create code
-            $code = ActiveCode::generateCode($user);
-
-            //TODO send sms
-
-            return redirect(route("login.getVerifyPhone"));
-        }
-        $user=User::where("email",$request->email)->first();
-        auth()->loginUsingId($user->id);
-        $user->notify(new LoginWebsiteNotification());
-        return false;
     }
 
 }

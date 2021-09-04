@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\TwoFacAuth\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\ActiveCode;
 use App\Models\User;
-use App\Notifications\LoginWebsiteNotification;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Modules\TwoFacAuth\Entities\ActiveCode;
 
 class VerifyPhoneController extends Controller
 {
-    public function getVerifyPhone(Request $request){
+    public function tokenPhoneForm(Request $request){
         $request->session()->reflash();
         if($request->session()->has("auth")){
             return view("auth.passwords.token");
@@ -19,7 +19,7 @@ class VerifyPhoneController extends Controller
         return redirect("/");
     }
 
-    public function postVerifyPhone(Request $request){
+    public function verifyTokenPhone(Request $request){
         $request->validate([
             "token"=>["required","numeric"]
         ]);
@@ -33,11 +33,9 @@ class VerifyPhoneController extends Controller
         $user->activeCode()->delete();
         auth()->loginUsingId($user->id);
 
-        alert()->success("logged in successfully","Success");
+        alert()->success("ورود با موفقیت انجام شد");
+
         return redirect("/home");
 
     }
-
-
-
 }
