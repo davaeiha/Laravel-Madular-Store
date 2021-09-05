@@ -8,9 +8,11 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if(in_array('GoogleAuth',\Nwidart\Modules\Facades\Module::allEnabled()))
                     <div class="col-md-8 offset-md-4 mb-3">
                         <a href="{{route('GoogleAuth')}}" class="btn btn-danger">login with google</a>
                     </div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row">

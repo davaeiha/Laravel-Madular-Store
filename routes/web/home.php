@@ -2,8 +2,6 @@
 
 
 use App\Http\Controllers\Auth\AuthGoogleController;
-use App\Http\Controllers\Auth\VerifyPhoneController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redis;
@@ -25,18 +23,8 @@ Route::get('/', function () {
 
 Auth::routes(['verify'=> true]);
 
-//Google Auth
-Route::get('/auth/google',[AuthGoogleController::class,"redirect"])->name('GoogleAuth');
-Route::get('/auth/google/callback',[AuthGoogleController::class,"callback"]);
-
-
-
-
 //home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
 
 
 Route::get('/wallet',function (){

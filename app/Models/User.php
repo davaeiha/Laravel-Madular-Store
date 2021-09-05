@@ -20,6 +20,7 @@ use Modules\TwoFacAuth\Entities\ActiveCode;
  * @method static where(string $string, int $int)
  * @method static latest()
  * @method static findOrFail(mixed $get)
+ * @method static create(array $array)
  * @property mixed permissions
  * @property mixed roles
  */

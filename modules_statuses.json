@@ -8,5 +8,6 @@
     "Comment": true,
     "Gallery": true,
     "OrderPayment": true,
-    "TwoFacAuth": true
+    "TwoFacAuth": true,
+    "GoogleAuth": true
 }
