@@ -9,5 +9,6 @@
     "Gallery": true,
     "OrderPayment": true,
     "TwoFacAuth": true,
-    "GoogleAuth": true
+    "GoogleAuth": true,
+    "Recaptcha": true
 }

@@ -57,8 +57,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 offset-md-4">
-                                <div class="g-recaptcha" data-sitekey="{{env("GOOGLE_RECAPTCHA_SITE_KEY")}}">
-                                </div>
+                                @recaptcha
                                 @error("g-recaptcha-response")
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -89,6 +88,3 @@
 
 @endsection
 
-@section("reCapcha")
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-@endsection

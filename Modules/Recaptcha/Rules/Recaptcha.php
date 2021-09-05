@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Rules;
+namespace Modules\Recaptcha\Rules;
 
-use GuzzleHttp\Psr7\Request;
-use http\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Validation\Rule;
 
-class recaptcha implements Rule
+class Recaptcha implements Rule
 {
     /**
      * Create a new rule instance.
@@ -21,13 +20,15 @@ class recaptcha implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
+     * @throws GuzzleException
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         try {
+            //send data including recaptcha token to google for verification
             $client = new \GuzzleHttp\Client();
             $jsonResponse = $client->request("POST","https://www.google.com/recaptcha/api/siteverify",[
                 "form_params"=>[
@@ -40,11 +41,10 @@ class recaptcha implements Rule
             $jsonResponse = json_decode($jsonResponse->getBody());
 
             return $jsonResponse->success;
-//            dd($jsonResponse);
+
         }catch(\Exception $exception){
             return false;
         }
-
     }
 
     /**
@@ -52,8 +52,8 @@ class recaptcha implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
-        return 'you have been recognized as a robot';
+        return 'شما به عنوان ربات تشخیص داده شدید.';
     }
 }

@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\LoginWebsiteNotification;
 use App\Providers\RouteServiceProvider;
-use App\Rules\recaptcha;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Modules\Recaptcha\Rules\Recaptcha;
 use Modules\TwoFacAuth\Entities\ActiveCode;
 use Modules\TwoFacAuth\Http\Controllers\Auth\TwoFactorAuth;
 use Nwidart\Modules\Facades\Module;
@@ -38,11 +38,16 @@ class LoginController extends Controller
 
     public function validateLogin(Request $request)
     {
-        $request->validate([
-            $this->username()=>"required",
-            "password"=>"required|string",
-            "g-recaptcha-response"=>["required",new recaptcha()]
-        ]);
+        if(in_array('Recaptcha',Module::allEnabled())){
+            $request->validate([
+                $this->username()=>"required",
+                "password"=>"required|string",
+                "g-recaptcha-response"=>["required",new Recaptcha()]
+            ],[
+                'g-recaptcha-response.required'=>'لطفا ریکچا را انجام دهید.'
+            ]);
+        }
+
     }
 
     /**

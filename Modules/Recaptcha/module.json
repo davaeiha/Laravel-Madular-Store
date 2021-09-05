@@ -1,0 +1,13 @@
+{
+    "name": "Recaptcha",
+    "alias": "recaptcha",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Recaptcha\\Providers\\RecaptchaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
