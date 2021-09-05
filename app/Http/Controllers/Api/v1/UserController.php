@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Modules\User\Transformers\Api\v1\User as UserResource;
+use App\Http\Resources\Api\v1\user as UserResource;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
