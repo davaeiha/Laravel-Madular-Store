@@ -12,6 +12,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\Rule;
 use Modules\TwoFacAuth\Entities\ActiveCode;
+use Modules\TwoFacAuth\Notifications\ActiveCodeNotification;
 use function PHPUnit\Framework\isNull;
 
 class ProfileController extends Controller
@@ -60,7 +61,7 @@ class ProfileController extends Controller
                 $request->session()->flash("phone_number",$validatedData["phone"]);
                 $code = ActiveCode::generateCode($request->user());
                 //TODO send sms to user
-//                $request->user()->notify(new ActiveCodeNotification($code));
+                $request->user()->notify(new ActiveCodeNotification($code,$validatedData['phone']));
 
                 return redirect(route('profile.tokenForm'));
             }
