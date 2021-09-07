@@ -17,6 +17,9 @@
                             <li class="nav-item">
                                 <a href="{{route('profile.orders')}}" class="nav-link {{request()->is('profile/orders') ? 'active ' : ''}}">سفارشات</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{route('profile.notifications')}}" class="nav-link {{request()->is('profile/notifications') ? 'active ' : ''}}">اعلان ها</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-body">

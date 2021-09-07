@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Modules\CategoryProduct\Entities\Product;
 use Modules\Comment\Entities\Comment;
 use Modules\Discount\Entities\Discount;
+use Modules\Notification\Entities\Notification;
 use Modules\OrderPayment\Entities\Order;
 use Modules\RolePermission\Entities\Permission;
 use Modules\RolePermission\Entities\Role;
@@ -251,4 +252,11 @@ class User extends Authenticatable implements  MustVerifyEmail
         return $this->belongsToMany(Discount::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function notificationRelations(): BelongsToMany
+    {
+        return $this->belongsToMany(Notification::class)->withPivot('channel_id');
+    }
 }

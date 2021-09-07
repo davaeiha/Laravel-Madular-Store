@@ -10,5 +10,6 @@
     "OrderPayment": true,
     "TwoFacAuth": true,
     "GoogleAuth": true,
-    "Recaptcha": true
+    "Recaptcha": true,
+    "Notification": true
 }
