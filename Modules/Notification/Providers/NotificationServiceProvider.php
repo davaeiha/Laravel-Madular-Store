@@ -2,8 +2,10 @@
 
 namespace Modules\Notification\Providers;
 
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Notification\Listeners\SetUserDefaultNotifySetting;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,7 @@ class NotificationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

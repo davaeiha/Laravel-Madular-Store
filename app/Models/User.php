@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Modules\CategoryProduct\Entities\Product;
 use Modules\Comment\Entities\Comment;
 use Modules\Discount\Entities\Discount;
+use Modules\Notification\Entities\Channel;
 use Modules\Notification\Entities\Notification;
 use Modules\OrderPayment\Entities\Order;
 use Modules\RolePermission\Entities\Permission;
@@ -24,6 +25,7 @@ use Modules\TwoFacAuth\Entities\ActiveCode;
  * @method static create(array $array)
  * @property mixed permissions
  * @property mixed roles
+ * @property mixed $notificationRelations
  */
 class User extends Authenticatable implements  MustVerifyEmail
 {
@@ -258,5 +260,34 @@ class User extends Authenticatable implements  MustVerifyEmail
     public function notificationRelations(): BelongsToMany
     {
         return $this->belongsToMany(Notification::class)->withPivot('channel_id');
+    }
+
+    /**
+     *  check user has a specific notification with a specific channel
+     *
+     * @param Notification $notification
+     * @param Channel $channel
+     * @return bool
+     */
+    public function checkNotificationChannel(Notification $notification,Channel $channel): bool
+    {
+            //check that user has this notification
+        if(!$this->notificationRelations->contains($notification)){
+            return false;
+        }else{
+            //check that this user`s notification has this channel
+            $userSpecificNotifications = $this->notificationRelations->filter(function ($userNotification) use ($notification) {
+                return $userNotification->id == $notification->id;
+            });
+
+            $status = $userSpecificNotifications->first(function ($userSpecificNotification) use ($channel) {
+                return $userSpecificNotification->pivot->channel_id == $channel->id;
+            });
+
+            if(is_null($status)){
+                return false;
+            }
+        }
+        return true;
     }
 }

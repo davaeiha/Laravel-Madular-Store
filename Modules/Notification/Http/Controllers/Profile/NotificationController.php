@@ -28,6 +28,8 @@ class NotificationController extends Controller
     }
 
     /**
+     * save notification settings for user
+     *
      * @param Request $request
      * @return RedirectResponse
      */
@@ -36,19 +38,39 @@ class NotificationController extends Controller
 
         //validation
         $validatedData = $request->validate([
-            'notification'=>['required','array'],
+            'notification'=>['array'],
         ]);
-        //TODO detach null checkbox from database
-        //sync data in notification_user table in database
-        collect($validatedData['notification'])->each(function ($channels,$notificationId) use ($request) {
-            collect($channels)->each(function ($check,$channelId) use ($notificationId, $request){
-                $request->user()->notificationRelations()->attach($notificationId,['channel_id'=>$channelId]);
+
+        $notifications = Notification::all();
+
+        //traverse collection of notification
+        $notifications->each( function ($notification) use ($validatedData, $request) {
+            //traverse collection of channels of a notification
+            $notification->channels->each(function ($channel) use ($validatedData, $notification, $request) {
+                //check settings already set in database
+                if ($request->user()->checkNotificationChannel($notification,$channel)){
+                    //check existence of a notification-channel request
+                    if (!isset($validatedData['notification'][$notification->id][$channel->id])){
+                        //detach data if a notification-channel is unchecked
+                        $request->user()
+                            ->notificationRelations()
+                            ->where('notification_id',$notification->id)
+                            ->wherePivot('channel_id',$channel->id)
+                            ->detach($notification->id);
+                    }
+                }else{
+                    //check existence of a notification-channel request
+                    if(isset($validatedData['notification'][$notification->id][$channel->id])){
+                        //attach data if a notification-channel is checked
+                        $request->user()
+                            ->notificationRelations()
+                            ->attach($notification->id,['channel_id'=>$channel->id]);
+                    }
+                }
             });
         });
-
         //alert
         alert()->success('سیستم اعلان شما با موفقیت ثبت شد');
-
         //redirect back
         return back();
 
