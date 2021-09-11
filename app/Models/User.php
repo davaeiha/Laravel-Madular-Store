@@ -30,7 +30,7 @@ use NotificationChannels\WebPush\HasPushSubscriptions;
  */
 class User extends Authenticatable implements  MustVerifyEmail
 {
-    use HasFactory, Notifiable,HasPushSubscriptions;
+    use HasFactory, Notifiable;
 
 
     /**
@@ -51,7 +51,7 @@ class User extends Authenticatable implements  MustVerifyEmail
         'phone_number',
         'api_token',
         'is_supervisor',
-        'is_staff'
+        'is_staff',
     ];
 
 

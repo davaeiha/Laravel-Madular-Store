@@ -69,13 +69,6 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
-  'laravel-notification-channels/webpush' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NotificationChannels\\WebPush\\WebPushServiceProvider',
-    ),
-  ),
   'laravel/sail' => 
   array (
     'providers' => 
