@@ -60,9 +60,9 @@ class ProfileController extends Controller
                 // make a Code
                 $request->session()->flash("phone_number",$validatedData["phone"]);
                 $code = ActiveCode::generateCode($request->user());
-                //TODO send sms to user
+                // send sms to user
                 $request->user()->notify(new ActiveCodeNotification($code,$validatedData['phone']));
-
+                //redirect back to the two-factor form
                 return redirect(route('profile.tokenForm'));
             }
 

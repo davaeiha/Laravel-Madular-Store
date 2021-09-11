@@ -1,33 +1,36 @@
 <?php
 
-namespace App\Notifications;
+namespace Modules\OrderPayment\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
-class LoginWebsiteNotification extends Notification implements  ShouldQueue
+class PaidEmailNotification extends Notification
 {
     use Queueable;
+
+    protected $price;
+    protected $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($price)
     {
-        //
+        $this->price = $price;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -35,24 +38,22 @@ class LoginWebsiteNotification extends Notification implements  ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-                ->from("Resume@info.com")
-                ->subject("new login")
-                ->view("EmailNotification.login",[
-                    "name"=>$notifiable->name,
-
-                ]);
+                    ->line("you have paid $this->price")
+                    ->from("resume@gmail.com")
+                    ->action('back your profile', route('profile.index'))
+                    ->line('Thank you for purchase!');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

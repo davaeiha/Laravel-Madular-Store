@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Modules\Cart\Helpers\Cart;
 use Modules\OrderPayment\Entities\Payment;
+use Modules\OrderPayment\Events\Paid;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment as ShetabitPayment;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
@@ -86,6 +87,9 @@ class PaymentController extends Controller
             $paying->order()->update([
                 "status"=>"paid"
             ]);
+
+            //dispatch event for notification
+            event(new Paid($paying));
 
             alert()->success("پرداخت شما با موفقبت انجام شد","تراکنش موفق")->closeOnClickOutside();
             return redirect("/products");

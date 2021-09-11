@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthGoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redis;
+use Modules\OrderPayment\Events\Paid;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Redis;
 */
 
 Route::get('/', function () {
+    $paying = \Modules\OrderPayment\Entities\Payment::find(26);
+    event(new Paid($paying));
     return view('welcome');
 });
 

@@ -17,6 +17,7 @@ use Modules\OrderPayment\Entities\Order;
 use Modules\RolePermission\Entities\Permission;
 use Modules\RolePermission\Entities\Role;
 use Modules\TwoFacAuth\Entities\ActiveCode;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 
 /**
  * @method static where(string $string, int $int)
@@ -29,7 +30,7 @@ use Modules\TwoFacAuth\Entities\ActiveCode;
  */
 class User extends Authenticatable implements  MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,HasPushSubscriptions;
 
 
     /**

@@ -13,4 +13,12 @@
       0 => 'Modules\\Notification\\Listeners\\SetUserDefaultNotifySetting',
     ),
   ),
+  'Modules\\OrderPayment\\Providers\\EventServiceProvider' => 
+  array (
+    'Modules\\OrderPayment\\Events\\Paid' => 
+    array (
+      0 => 'Modules\\OrderPayment\\Listeners\\SendSmsNotification',
+      1 => 'Modules\\OrderPayment\\Listeners\\SendEmailNotification',
+    ),
+  ),
 );
