@@ -6,10 +6,15 @@
     "priority": 0,
     "providers": [
         "Modules\\OrderPayment\\Providers\\OrderPaymentServiceProvider",
-        "Modules\\OrderPayment\\Providers\\EventServiceProvider"
+        "Modules\\OrderPayment\\Providers\\EventServiceProvider",
+        "Modules\\OrderPayment\\Providers\\BroadcastServiceProvider"
 
     ],
     "aliases": {},
     "files": [],
-    "requires": []
+    "requires": [],
+    "minimumCoreVersion": "",
+    "title": "",
+    "version":"",
+    "author": ""
 }

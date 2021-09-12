@@ -2,11 +2,12 @@
 
 namespace Modules\OrderPayment\Events;
 
-use App\Models\User;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
 use Modules\OrderPayment\Entities\Payment;
 
-class Paid
+class Paid implements ShouldBroadcast
 {
     use SerializesModels;
 
@@ -24,13 +25,8 @@ class Paid
         $this->payment = $payment;
     }
 
-    /**
-     * Get the channels the event should be broadcast on.
-     *
-     * @return array
-     */
     public function broadcastOn()
     {
-        return [];
+        // TODO: Implement broadcastOn() method.
     }
 }

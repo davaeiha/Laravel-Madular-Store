@@ -39,18 +39,6 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
-  'flotfeali/payping-client' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'PayPing\\Laravel\\PayPingServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Authorization' => 'PayPing\\Laravel\\Facade\\Authorization',
-      'Payment' => 'PayPing\\Laravel\\Facade\\Payment',
-    ),
-  ),
   'fruitcake/laravel-cors' => 
   array (
     'providers' => 

@@ -10,9 +10,8 @@
         "alexusmai/laravel-file-manager": "^2.5",
         "artesaos/seotools": "^0.20.1",
         "fideloper/proxy": "^4.4",
-        "flotfeali/payping-client": "^0.0.1",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^7.2.0",
         "kavenegar/php": "^1.2",
         "laravel/framework": "^8.40",
         "laravel/socialite": "^5.2",
@@ -20,6 +19,7 @@
         "laravel/ui": "^3.3",
         "morilog/jalali": "^3.2",
         "nwidart/laravel-modules": "^8.2",
+        "pusher/pusher-php-server": "^7.0",
         "shetabit/payment": "^4.0",
         "uxweb/sweet-alert": "^2.0"
     },

@@ -20,7 +20,7 @@ use Modules\OrderPayment\Events\Paid;
 
 Route::get('/', function () {
     $paying = \Modules\OrderPayment\Entities\Payment::find(26);
-    event(new Paid($paying));
+    $event = event(new Paid($paying));
     return view('welcome');
 });
 
@@ -29,6 +29,9 @@ Auth::routes(['verify'=> true]);
 //home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/pusher',function (){
+
+});
 
 Route::get('/wallet',function (){
     return "this is Hermodr wallet page";
