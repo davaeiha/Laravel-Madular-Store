@@ -11,6 +11,7 @@ use Modules\Notification\Database\factories\NotificationFactory;
 /**
  * @method static create(array $array)
  * @method static paginate(int $int)
+ * @method static where(string $string, string $string1)
  */
 class Notification extends Model
 {

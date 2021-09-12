@@ -10,6 +10,7 @@ use Modules\Notification\Database\factories\ChannelFactory;
 /**
  * @method static create(array $array)
  * @method static paginate(int $int)
+ * @method static where(string $string, string $string1)
  */
 class Channel extends Model
 {
