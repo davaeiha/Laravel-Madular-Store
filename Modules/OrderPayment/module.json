@@ -6,8 +6,7 @@
     "priority": 0,
     "providers": [
         "Modules\\OrderPayment\\Providers\\OrderPaymentServiceProvider",
-        "Modules\\OrderPayment\\Providers\\EventServiceProvider",
-        "Modules\\OrderPayment\\Providers\\BroadcastServiceProvider"
+        "Modules\\OrderPayment\\Providers\\EventServiceProvider"
 
     ],
     "aliases": {},

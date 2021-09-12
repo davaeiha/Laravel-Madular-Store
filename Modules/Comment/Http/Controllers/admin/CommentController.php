@@ -1,8 +1,4 @@
-<?php
-
-namespace Modules\Comment\Http\Controllers\admin;
-
-
+<?php namespace Modules\Comment\Http\Controllers\admin;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -12,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Comment\Entities\Comment;
+use Modules\Comment\Events\Comment as CommentEvent;
 
-class CommentController extends  Controller
+
+class CommentController extends Controller
 {
     public function __construct()
     {
@@ -56,6 +54,8 @@ class CommentController extends  Controller
         $comment->update([
             "approved"=>1
         ]);
+
+        event(new CommentEvent($comment));
 
         alert()->success("کامنت مورد نظر تایید شد.");
         return back();

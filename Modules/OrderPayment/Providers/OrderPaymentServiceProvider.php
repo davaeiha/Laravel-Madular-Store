@@ -39,7 +39,6 @@ class OrderPaymentServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
-        $this->app->register(BroadcastServiceProvider::class);
     }
 
     /**
