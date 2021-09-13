@@ -46,24 +46,21 @@
             </div>
 
             <div class="form-group">
-                <label for="user" class="col-sm-2 control-label">کاربران</label>
-                <select name="user" id="user" class="form-control" >
-                    <option value="all" name="all" {{old('all') ? 'selected' : '' }}>همه کاربران</option>
-                    <option value="low" name="low" {{old('low') ? 'selected' : ''}}>0-100</option>
-                    <option value="middle" name="middle" {{old('low') ? 'selected' : ''}}>101-200</option>
-                    <option value="high" name="high" {{old('low') ? 'selected' : ''}}>201 به بالا</option>
+                <label for="users" class="col-sm-2 control-label">کاربران</label>
+                <select name="users" id="users" class="form-control" disabled >
+                    <option value="2" name="1" selected>همه کاربران</option>
                 </select>
             </div>
 
             @php
-                $categories =\App\Models\Category::all();
+                $categories = \Modules\CategoryProduct\Entities\Category::all();
 
                 foreach($categories as $category){
                     if ($category->child->isEmpty()){
                         $lastLevelCategory[] = $category;
                     }
                 }
-            $products = \App\Models\Product::all();
+            $products = \Modules\CategoryProduct\Entities\Product::all();
             @endphp
 
             <div class="form-group">

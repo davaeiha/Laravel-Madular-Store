@@ -14,6 +14,8 @@ use Modules\Discount\Database\factories\DiscountFactory;
 
 /**
  * @method static where(string $string, mixed $code)
+ * @method static latest()
+ * @method static create(array $array)
  * @property mixed products
  * @property mixed code
  * @property mixed percent

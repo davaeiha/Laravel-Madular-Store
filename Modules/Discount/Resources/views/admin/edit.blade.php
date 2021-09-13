@@ -49,23 +49,20 @@
 
             <div class="form-group">
                 <label for="user" class="col-sm-2 control-label">کاربران</label>
-                <select name="user" id="user" class="form-control" >
-                    <option value="all" name="all" {{ $discount->users()->pluck('id')->toArray() == \App\Models\User::all()->pluck('id')->toArray() ? 'selected' : '' }}>همه کاربران</option>
-                    <option value="low" name="low" {{ $discount->users()->whereBetween('UX_rank',[0,100])->count() != 0 ? 'selected' : ''}}>0-100</option>
-                    <option value="middle" name="middle" {{$discount->users()->whereBetween('UX_rank',[101,200])->count() != 0 ? 'selected' : ''}}>101-200</option>
-                    <option value="high" name="high" {{$discount->users()->where('UX_rank','>=',201)->count() != 0 ? 'selected' : ''}}>201 به بالا</option>
+                <select name="user" id="user" class="form-control" disabled>
+                    <option value="all" name="all" selected>همه کاربران</option>
                 </select>
             </div>
 
             @php
-                $categories =\App\Models\Category::all();
+                $categories =\Modules\CategoryProduct\Entities\Category::all();
 
                 foreach($categories as $category){
                     if ($category->child->isEmpty()){
                         $lastLevelCategory[] = $category;
                     }
                 }
-            $products = \App\Models\Product::all();
+            $products = \Modules\CategoryProduct\Entities\Product::all();
             @endphp
 
             <div class="form-group">

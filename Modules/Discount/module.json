@@ -6,7 +6,8 @@
     "keywords": [],
     "priority": 3,
     "providers": [
-        "Modules\\Discount\\Providers\\DiscountServiceProvider"
+        "Modules\\Discount\\Providers\\DiscountServiceProvider",
+        "Modules\\Discount\\Providers\\EventServiceProvider"
     ],
     "aliases": {},
     "files": [],

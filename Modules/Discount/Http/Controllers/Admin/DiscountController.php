@@ -62,28 +62,26 @@ class DiscountController extends Controller
      */
     public function store(Request $request)
     {
-
+        //validation
         $validatedData = $request->validate([
             "occasion" => ['required', 'string', 'max:30'],
             "code" => ['required', 'unique:discounts', "string", 'max:8'],
             "percent" => ["required", "numeric", 'between:0,100'],
-            "user" => ["required", 'string', Rule::in(['all', 'low', 'middle', 'high'])],
             "expired_at" => ['date'],
             'category' => ['array', Rule::requiredIf(is_null($request->product)), 'exists:categories,id'],
             'product' => ['array', Rule::requiredIf(is_null($request->category)), 'exists:products,id']
         ]);
-
+        //create discount
         $discount = Discount::create([
             'occasion'=>$validatedData['occasion'],
             'code'=>$validatedData['code'],
             'percent'=>$validatedData['percent'],
             'expired_at'=>$validatedData['expired_at'],
         ]);
-
-        $discount->users()->detach();
-
-        $this->attachUser($request, $discount);
-
+        //sync discount with users
+        $users = User::all();
+        $discount->users()->sync($users->pluck('id')->toArray());
+        //sync discount with categories
         if(!is_null($request->category)){
             $discount->categories()->sync($validatedData['category']);
             collect($validatedData['category'])->each(function ($categoryId) use ($discount) {
@@ -95,25 +93,28 @@ class DiscountController extends Controller
                 });
             });
         }
-
+        //sync discount with products
         if (!is_null($request->product)){
             $discount->products()->sync($validatedData['product']);
         }
-
+        //set event
+        event(new \Modules\Discount\Events\Discount($discount,$users));
+        //alert user
         alert()->success("تخفیف مورد نظر با موفقیت ایجاد شد");
+        //redirect admin back to the index page
         return redirect(route('admin.discounts.index'));
 
     }
 
-//    /**
-//     * Show the specified resource.
-//     * @param images $discount
-//     * @return Renderable
-//     */
-//    public function show(images $discount): Renderable
-//    {
-//        return view('discount::admin.details',compact('discount'));
-//    }
+    /**
+     * Show the specified resource.
+     * @param Discount $discount
+     * @return Renderable
+     */
+    public function show(Discount $discount): Renderable
+    {
+        return view('discount::admin.details',compact('discount'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -133,25 +134,26 @@ class DiscountController extends Controller
      */
     public function update(Request $request, Discount $discount)
     {
+        //validation
         $validatedData = $request->validate([
             "occasion" => ['required', 'string', 'max:30'],
             "code" => ['required', Rule::unique('discounts')->ignore($discount->id), "string", 'max:6'],
             "percent" => ["required", "numeric", 'between:0,100'],
-            "user" => ["required", 'string', Rule::in(['all', 'low', 'middle', 'high'])],
             "expired_at" => ['date'],
             'category' => ['array', Rule::requiredIf(is_null($request->product)),'exists:categories,id'],
             'product' => ['array',Rule::requiredIf(is_null($request->category)),'exists:products,id']
         ]);
 
+        //update discount
         $discount->update([
             'occasion'=>$validatedData['occasion'],
             'code'=>$validatedData['code'],
             'percent'=>$validatedData['percent'],
             'expired_at'=>$validatedData['expired_at'],
         ]);
-
-        $this->attachUser($request, $discount);
-
+        //sync discount with users
+        $discount->users()->sync(User::all()->pluck('id')->toArray());
+        //sync discount with categories
         if(!is_null($request->category)){
             $discount->categories()->sync($validatedData['category']);
 
@@ -164,12 +166,13 @@ class DiscountController extends Controller
             });
 
         }
-
+        //sync discount with products
         if (!is_null($request->product)){
             $discount->products()->sync($validatedData['product']);
         }
-
+        //alert user
         alert()->success("تخفیف مورد نظر با موفقیت ویرایش شد");
+        //redirect user back to index page
         return redirect(route("admin.discounts.index"));
 
     }
@@ -181,25 +184,12 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount): RedirectResponse
     {
+        //delete discount
         $discount->delete();
+        //alert user for deleting
         alert()->success("تخفیف مورد نظر با موفقیت حذف شد");
+        //redirect back
         return back();
     }
 
-    /**
-     * @param Request $request
-     * @param Discount $discount
-     */
-    public function attachUser(Request $request, Discount $discount): void
-    {
-        if ($request->user == 'all') {
-            $discount->users()->sync(User::all()->pluck('id')->toArray());
-        } elseif ($request->user == 'low') {
-            $discount->users()->sync(User::whereBetween('UX_rank', [0, 100])->pluck('id')->toArray());
-        } elseif ($request->user == 'middle') {
-            $discount->users()->sync(User::whereBetween('UX_rank', [101, 200])->pluck('id')->toArray());
-        } else {
-            $discount->users()->sync(User::where('UX_rank', '>=', 201)->pluck('id')->toArray());
-        }
-    }
 }

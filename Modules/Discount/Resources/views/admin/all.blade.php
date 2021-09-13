@@ -60,10 +60,11 @@
                                     <button class="btn btn-sm btn-danger ml-1">حذف</button>
                                 </form>
                                 @endcan
+                                    <a href="{{ route('admin.discounts.show' , $discount->id) }}" class="btn btn-sm btn-warning  ml-1"> جزئیات </a>
                                 @can('edit-discount')
                                     <a href="{{route("admin.discounts.edit",["discount"=>$discount->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
                                 @endcan
-{{--                                    <a href="{{route("admin.discounts.show",["discount"=>$discount->id])}}" class="btn btn-sm btn-info mr-1">جزییات تخفیف</a>--}}
+
                             </td>
                         </tr>
 
