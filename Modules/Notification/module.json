@@ -1,9 +1,9 @@
 {
     "name": "Notification",
-    "alias": "notification",
-    "description": "",
+    "alias": "اعلان",
+    "description": "ماژولی برای ایجاد کانال و مئیریت اعلان های کاربر",
     "keywords": [],
-    "priority": 0,
+    "priority": 4,
     "providers": [
         "Modules\\Notification\\Providers\\NotificationServiceProvider",
         "Modules\\Notification\\Providers\\EventServiceProvider"

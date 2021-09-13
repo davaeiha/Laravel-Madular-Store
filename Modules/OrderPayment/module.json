@@ -1,9 +1,9 @@
 {
     "name": "OrderPayment",
-    "alias": "orderpayment",
-    "description": "",
+    "alias": "سفارش و پرداخت",
+    "description": "ماژولی برای تعیین وضعیت سفارشات و مدیریت پرداخت های کاربر",
     "keywords": [],
-    "priority": 0,
+    "priority": 2,
     "providers": [
         "Modules\\OrderPayment\\Providers\\OrderPaymentServiceProvider",
         "Modules\\OrderPayment\\Providers\\EventServiceProvider"

@@ -1,7 +1,7 @@
 {
     "name": "Comment",
-    "alias": "comment",
-    "description": "",
+    "alias": "نظرات",
+    "description": "ماژولی برای مدیریت کامن ها ی کاربران",
     "keywords": [],
     "priority": 2,
     "providers": [

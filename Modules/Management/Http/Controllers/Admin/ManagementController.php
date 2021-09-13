@@ -21,22 +21,33 @@ class ManagementController extends Controller
         return view('management::admin.all',compact('modules'));
     }
 
+    /**
+     * enable a module
+     *
+     * @param $moduleName
+     * @return RedirectResponse
+     */
     public function enable($moduleName): RedirectResponse
     {
         $module = Module::findOrFail($moduleName);
         $module->enable();
         $moduleInfo = new Json($module->getPath()."\Module.json");
-        alert()->success(" ماژول{$moduleInfo->get('alias')} با موفقیت فعال شد ");
+        alert()->success(" ماژول {$moduleInfo->get('alias')} با موفقیت فعال شد ");
         return back();
     }
 
-
+    /**
+     * disable a module
+     *
+     * @param $moduleName
+     * @return RedirectResponse
+     */
     public function disable($moduleName): RedirectResponse
     {
         $module = Module::findOrFail($moduleName);
         $module->disable();
         $moduleInfo = new Json($module->getPath()."\Module.json");
-        alert()->success(" ماژول{$moduleInfo->get('alias')} با موفقیت فعال شد");
+        alert()->success(" ماژول {$moduleInfo->get('alias')} با موفقیت فعال شد");
         return back();
     }
 }

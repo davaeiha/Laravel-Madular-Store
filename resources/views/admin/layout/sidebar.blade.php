@@ -44,8 +44,15 @@
                             </ul>
                         </li>
                     @endcan
-
-                    @foreach(\Nwidart\Modules\Facades\Module::allEnabled() as $enabledModule)
+                    @php
+                        $orderedModules = \Nwidart\Modules\Facades\Module::getOrdered();
+                        foreach ($orderedModules as $moduleName => $orderedModule){
+                            if(\Nwidart\Modules\Facades\Module::isEnabled($moduleName)){
+                                $enabeldOrderdModules[$moduleName]=$orderedModule;
+                            }
+                        }
+                    @endphp
+                    @foreach($enabeldOrderdModules as $enabledModule)
                         @if(\Illuminate\Support\Facades\View::exists("{$enabledModule->getLowerName()}::admin.{$enabledModule->getLowerName()}-side"))
                             @include("{$enabledModule->getLowerName()}::admin.{$enabledModule->getLowerName()}-side")
                         @endif

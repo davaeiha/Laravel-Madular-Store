@@ -1,7 +1,7 @@
 {
     "name": "RolePermission",
-    "alias": "rolepermission",
-    "description": "",
+    "alias": "مقام و سطح دسترسی ها ",
+    "description": "ماژول مدیریت مفام ها و دسترسی کاربران به بخش های مختلف فروشگاه",
     "keywords": [],
     "priority": 0,
     "canDisable": false,

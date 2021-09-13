@@ -1,9 +1,9 @@
 {
     "name": "Recaptcha",
-    "alias": "recaptcha",
-    "description": "",
+    "alias": "ریکپچا",
+    "description": "ماژول ریکپچای گوگل",
     "keywords": [],
-    "priority": 0,
+    "priority": 1,
     "providers": [
         "Modules\\Recaptcha\\Providers\\RecaptchaServiceProvider"
     ],

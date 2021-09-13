@@ -1,7 +1,7 @@
 {
     "name": "Gallery",
-    "alias": "gallery",
-    "description": "",
+    "alias": "گالری",
+    "description": "ماژولی برای ایجاد گالری محصول",
     "keywords": [],
     "priority": 4,
     "providers": [

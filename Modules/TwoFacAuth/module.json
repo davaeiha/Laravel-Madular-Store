@@ -1,9 +1,9 @@
 {
     "name": "TwoFacAuth",
-    "alias": "twofacauth",
-    "description": "",
+    "alias": "احراز دو مرحله ای",
+    "description": "ماژولی برای احراز هویت دو مرحله ای با تلفن همراه",
     "keywords": [],
-    "priority": 0,
+    "priority": 3,
     "providers": [
         "Modules\\TwoFacAuth\\Providers\\TwoFacAuthServiceProvider"
     ],

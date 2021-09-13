@@ -1,7 +1,7 @@
 {
     "name": "CategoryProduct",
-    "alias": "categoryproduct",
-    "description": "",
+    "alias": "محصولات و دسته بندی",
+    "description": "ماژوای برای مدیریت محصولات و دسته بندی ها برای کاربران و ادمین",
     "keywords": [],
     "priority": 1,
     "providers": [

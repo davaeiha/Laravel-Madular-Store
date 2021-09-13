@@ -1,9 +1,9 @@
 {
     "name": "GoogleAuth",
-    "alias": "googleauth",
-    "description": "",
+    "alias": "احراز هویت با گوگل",
+    "description": "ماژولی برای ثبت نام و لاگین با اکانت گوگل",
     "keywords": [],
-    "priority": 0,
+    "priority": 2,
     "providers": [
         "Modules\\GoogleAuth\\Providers\\GoogleAuthServiceProvider"
     ],
