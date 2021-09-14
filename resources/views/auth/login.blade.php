@@ -8,8 +8,8 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    @if(in_array('GoogleAuth',\Nwidart\Modules\Facades\Module::allEnabled()))
-                    <div class="col-md-8 offset-md-4 mb-3">
+                    @if(\Nwidart\Modules\Facades\Module::isEnabled('GoogleAuth'))
+                        <div class="col-md-8 offset-md-4 mb-3">
                         <a href="{{route('GoogleAuth')}}" class="btn btn-danger">login with google</a>
                     </div>
                     @endif
@@ -54,18 +54,18 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 offset-md-4">
-                                @recaptcha
-                                @error("g-recaptcha-response")
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        @if(\Nwidart\Modules\Facades\Module::isEnable('Recaptcha'))
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-4">
+                                    @recaptcha
+                                    @error("g-recaptcha-response")
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-
+                        @endif
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

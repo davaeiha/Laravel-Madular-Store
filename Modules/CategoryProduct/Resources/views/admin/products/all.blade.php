@@ -60,8 +60,9 @@
                                 @endcan
                                 @can('edit-product')
                                     <a href="{{route("admin.products.edit",["product"=>$product->id])}}" class="btn btn-sm btn-primary">ویرایش</a>
-
-                                    <a href="{{route("admin.product.gallery.index",["product"=>$product->id])}}" class="btn btn-sm mr-1 btn-info btn-primary">گالری تصاویر</a>
+                                    @if(\Nwidart\Modules\Facades\Module::isEnabled('Gallery'))
+                                        <a href="{{route("admin.product.gallery.index",["product"=>$product->id])}}" class="btn btn-sm mr-1 btn-info btn-primary">گالری تصاویر</a>
+                                    @endif
                                 @endcan
                             </td>
                         </tr>

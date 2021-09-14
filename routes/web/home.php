@@ -29,9 +29,12 @@ Auth::routes(['verify'=> true]);
 //home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/pusher',function (){
-
+//profile panel
+Route::middleware(['auth'])->name('profile.')->prefix("profile")->group(function () {
+    //index profile
+    Route::get('/', [ProfileController::class, 'index'])->middleware("verified")->name('index');
 });
+
 
 Route::get('/wallet',function (){
     return "this is Hermodr wallet page";

@@ -117,7 +117,7 @@
                 </div>
                 <!-- / Shopping cart table -->
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                    @if(in_array('images',array_keys(\Nwidart\Modules\Facades\Module::allEnabled())))
+                    @if(\Nwidart\Modules\Facades\Module::isEnabled('Discount'))
                         @if(\Modules\Cart\Helpers\Cart::isAllWithoutDiscount())
                             <div class="mt-4">
                                 <form action="{{route('discount.check')}}" method="post">
@@ -154,15 +154,15 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="float-left">
+                @if(\Nwidart\Modules\Facades\Module::isEnable('OrderPayment'))
+                    <div class="float-left">
                     <form action="{{route("payment.post")}}" method="post" id="payment">
                         @csrf
                     </form>
 
                     <button type="button" onclick="event.preventDefault();document.getElementById('payment').submit()" class="btn btn-lg btn-primary mt-2">پرداخت</button>
                 </div>
-
+                @endif
             </div>
         </div>
     </div>
