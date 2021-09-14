@@ -3,7 +3,7 @@
     "alias": "اعلان",
     "description": "ماژولی برای ایجاد کانال و مئیریت اعلان های کاربر",
     "keywords": [],
-    "priority": 4,
+    "priority": 1,
     "providers": [
         "Modules\\Notification\\Providers\\NotificationServiceProvider",
         "Modules\\Notification\\Providers\\EventServiceProvider"
