@@ -13,10 +13,8 @@ use Modules\TwoFacAuth\Http\Controllers\Profile\ProfileController;
 |
 */
 
-//profile panel
+//profile Two-fac panel
 Route::middleware(['auth'])->name('profile.')->prefix("profile")->group(function (){
-    //index profile
-    Route::get('/',[ProfileController::class,'index'])->middleware("verified")->name('index');
 
     //two-factor auth
     Route::get('/two-factor-auth',[ProfileController::class,"showTwoFacAuthForm"])->name('2FA.show');

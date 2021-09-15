@@ -1,7 +1,5 @@
 <?php
 
-
-use App\Http\Controllers\Auth\AuthGoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redis;
@@ -32,7 +30,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //profile panel
 Route::middleware(['auth'])->name('profile.')->prefix("profile")->group(function () {
     //index profile
-    Route::get('/', [ProfileController::class, 'index'])->middleware("verified")->name('index');
+    Route::get('/', function (){
+        return view('profile.index');
+    })->middleware("verified")->name('index');
 });
 
 

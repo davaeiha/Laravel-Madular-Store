@@ -17,14 +17,6 @@ use function PHPUnit\Framework\isNull;
 
 class ProfileController extends Controller
 {
-    /**
-     * index page of profile
-     *
-     * @return Application|Factory|View
-     */
-    public function index(){
-        return view('twofacauth::profile.index');
-    }
 
     /**
      *two-factor Authentication form of profile
