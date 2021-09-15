@@ -38,8 +38,8 @@
                     type : 'POST',
                     url : "{{route('send.comment')}}",
                     data : JSON.stringify(data),
-                    success : function(data) {
-                        console.log(data);
+                    success : function(res) {
+                        location.reload()
                     },
                     error : function (){
                         console.log("error");

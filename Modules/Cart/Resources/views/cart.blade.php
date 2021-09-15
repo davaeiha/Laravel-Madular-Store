@@ -21,7 +21,6 @@
                 data : JSON.stringify({
                     id : id ,
                     quantity : event.target.value,
-                    // cart : cartName,
                     _method : 'PATCH'
                 }),
                 success : function(res) {

@@ -32,7 +32,7 @@ Route::post('/comments',function (Request $request){
     ]);
 
     $request->user()->comments()->create($validatedData);
-    alert()->success("نظر شما با موفقیت ثبت شد");
+    alert()->success("نظر شما با موفقیت ثبت شد بعد از تایید در سایت نمایش داده خواهد شد.");
 
     return response()->json([
         'status'=>"successfully done"
